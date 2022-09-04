@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import biblesReducer from './biblesSlice'
 import user from './userSlice'
 
 export const store = configureStore({
     reducer: {
-        bibles: biblesReducer,
         user: user
     }
 })
