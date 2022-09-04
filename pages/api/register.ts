@@ -15,8 +15,8 @@ export default async function handler(
     try {
         const { username, password, language, version } = req.body;
         await connectMongo();
-        bcrypt.genSalt(10, (err, salt): void => {
-            bcrypt.hash(password, salt, async (err, hash) => {
+        bcrypt.genSalt(10, (_err, salt): void => {
+            bcrypt.hash(password, salt, async (_err, hash) => {
                 User.create({
                   "username": username, 
                   "password": hash,
