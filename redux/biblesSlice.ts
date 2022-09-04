@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-// import type { RootState} from './store'
 
 interface ILanguages {
     id: string
@@ -30,6 +29,5 @@ export const biblesSlice = createSlice({
 })
 
 export const { setBibles, setLanguages } = biblesSlice.actions
-// export const { bibles, languages } = (state: RootState) => state.biblesReducer
 
 export default biblesSlice.reducer
