@@ -1,0 +1,82 @@
+@import '../variables';
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $light_grey;
+
+    form {
+        // border: 2px solid $red_brown;
+        border-radius: 1rem;
+        box-shadow: inset 0 0 0.7rem 0rem rgba($color: $red_brown_dark, $alpha: 0.8);
+        width: max-content;
+        height: 20rem;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        padding: 2rem 1rem;
+
+        h1 {
+            color: $red_brown;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        input {
+            width: 100%;
+            height: 2rem;
+            padding: 0.3rem;
+            background-color: transparent;
+            border: 0.1rem solid rgba($color: $red_brown, $alpha: 0.8);
+            border-radius: 0.2rem;
+            color: $red_brown_dark;
+            outline: none;
+
+            &::placeholder {
+                color: rgba($color: $red_brown_dark, $alpha: 0.6);
+            }
+
+            &:focus {
+                border: 0.15rem solid rgba($color: $red_brown, $alpha: 0.8);
+            }
+        }
+
+        .langAndVersion {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            width: 100%;
+            
+            select {
+                background-color: transparent;
+                border-radius: 0.2rem;
+                border: 0.1rem solid rgba($color: $red_brown, $alpha: 0.8);
+                color: $red_brown_dark;
+
+                option {
+                    color: $red_brown_dark;
+                }
+            }
+        }
+
+        .submitBtn {
+            width: 5rem;
+            height: 2rem;
+            background-color: rgba($color: $red_brown, $alpha: 1.0);
+            border: none;
+            border-radius: 0.5rem;
+            color: $light_grey;
+            transition: opacity ease-out 0.15s;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+    }
+}

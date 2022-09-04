@@ -1,0 +1,498 @@
+[
+    {
+        "id": "eng",
+        "name": "English"
+    },
+    {
+        "id": "ahr",
+        "name": "Ahirani"
+    },
+    {
+        "id": "anh",
+        "name": "Nend"
+    },
+    {
+        "id": "arb",
+        "name": "Arabic, Standard"
+    },
+    {
+        "id": "arp",
+        "name": "Arapaho"
+    },
+    {
+        "id": "asm",
+        "name": "Assamese"
+    },
+    {
+        "id": "bdv",
+        "name": "Bodo Parja"
+    },
+    {
+        "id": "bel",
+        "name": "Belarusan"
+    },
+    {
+        "id": "ben",
+        "name": "Bengali"
+    },
+    {
+        "id": "beo",
+        "name": "Beami"
+    },
+    {
+        "id": "bfz",
+        "name": "Pahari, Mahasu"
+    },
+    {
+        "id": "bgc",
+        "name": "Haryanvi"
+    },
+    {
+        "id": "bgg",
+        "name": "Bugun"
+    },
+    {
+        "id": "bhd",
+        "name": "Bhadrawahi"
+    },
+    {
+        "id": "bht",
+        "name": "Bhattiyali"
+    },
+    {
+        "id": "bla",
+        "name": "Siksika"
+    },
+    {
+        "id": "bpx",
+        "name": "Bareli, Palya"
+    },
+    {
+        "id": "bsp",
+        "name": "Baga Sitemu"
+    },
+    {
+        "id": "bwo",
+        "name": "Borna"
+    },
+    {
+        "id": "ces",
+        "name": "Czech"
+    },
+    {
+        "id": "ckb",
+        "name": "Kurdish, Central"
+    },
+    {
+        "id": "cmn",
+        "name": "Chinese, Mandarin"
+    },
+    {
+        "id": "cwe",
+        "name": "Kwere"
+    },
+    {
+        "id": "dao",
+        "name": "Chin, Daai"
+    },
+    {
+        "id": "deu",
+        "name": "German, Standard"
+    },
+    {
+        "id": "dso",
+        "name": "Desiya"
+    },
+    {
+        "id": "dwr",
+        "name": "Dawro"
+    },
+    {
+        "id": "ena",
+        "name": "Apali"
+    },
+    {
+        "id": "ewe",
+        "name": "Éwé"
+    },
+    {
+        "id": "fuf",
+        "name": "Pular"
+    },
+    {
+        "id": "gai",
+        "name": "Borei"
+    },
+    {
+        "id": "gaq",
+        "name": "Gata’"
+    },
+    {
+        "id": "geb",
+        "name": "Kire"
+    },
+    {
+        "id": "gmv",
+        "name": "Gamo"
+    },
+    {
+        "id": "gof",
+        "name": "Gofa"
+    },
+    {
+        "id": "grc",
+        "name": "Greek, Ancient"
+    },
+    {
+        "id": "guj",
+        "name": "Gujarati"
+    },
+    {
+        "id": "hau",
+        "name": "Hausa"
+    },
+    {
+        "id": "heb",
+        "name": "Hebrew, Modern"
+    },
+    {
+        "id": "hin",
+        "name": "Hindi"
+    },
+    {
+        "id": "hoy",
+        "name": "Holiya"
+    },
+    {
+        "id": "hrv",
+        "name": "Croatian"
+    },
+    {
+        "id": "hun",
+        "name": "Hungarian"
+    },
+    {
+        "id": "ibo",
+        "name": "Igbo"
+    },
+    {
+        "id": "ind",
+        "name": "Indonesian"
+    },
+    {
+        "id": "ita",
+        "name": "Italian"
+    },
+    {
+        "id": "juy",
+        "name": "Juray"
+    },
+    {
+        "id": "kan",
+        "name": "Kannada"
+    },
+    {
+        "id": "kca",
+        "name": "Khanty"
+    },
+    {
+        "id": "kdc",
+        "name": "Kutu"
+    },
+    {
+        "id": "kde",
+        "name": "Makonde"
+    },
+    {
+        "id": "kfc",
+        "name": "Konda-Dora"
+    },
+    {
+        "id": "kfw",
+        "name": "Naga, Kharam"
+    },
+    {
+        "id": "kik",
+        "name": "Gikuyu"
+    },
+    {
+        "id": "kpg",
+        "name": "Kapingamarangi"
+    },
+    {
+        "id": "kqa",
+        "name": "Mum"
+    },
+    {
+        "id": "kql",
+        "name": "Kyenele"
+    },
+    {
+        "id": "kxv",
+        "name": "Kuvi"
+    },
+    {
+        "id": "lbm",
+        "name": "Lodhi"
+    },
+    {
+        "id": "lin",
+        "name": "Lingala"
+    },
+    {
+        "id": "lug",
+        "name": "Ganda"
+    },
+    {
+        "id": "luo",
+        "name": "Dholuo"
+    },
+    {
+        "id": "mal",
+        "name": "Malayalam"
+    },
+    {
+        "id": "mar",
+        "name": "Marathi"
+    },
+    {
+        "id": "mdy",
+        "name": "Maale"
+    },
+    {
+        "id": "mgc",
+        "name": "Morokodo"
+    },
+    {
+        "id": "mgh",
+        "name": "Makhuwa-Meetto"
+    },
+    {
+        "id": "mgw",
+        "name": "Matumbi"
+    },
+    {
+        "id": "mni",
+        "name": "Meitei"
+    },
+    {
+        "id": "msc",
+        "name": "Sankaran Maninka"
+    },
+    {
+        "id": "msy",
+        "name": "Aruamu"
+    },
+    {
+        "id": "mwe",
+        "name": "Mwera"
+    },
+    {
+        "id": "nag",
+        "name": "Naga Pidgin"
+    },
+    {
+        "id": "ndj",
+        "name": "Ndamba"
+    },
+    {
+        "id": "ngo",
+        "name": "Ngoni"
+    },
+    {
+        "id": "ngp",
+        "name": "Nguu"
+    },
+    {
+        "id": "nho",
+        "name": "Takuu"
+    },
+    {
+        "id": "nld",
+        "name": "Dutch"
+    },
+    {
+        "id": "nlx",
+        "name": "Nahali"
+    },
+    {
+        "id": "nnq",
+        "name": "Ngindo"
+    },
+    {
+        "id": "nya",
+        "name": "Chichewa"
+    },
+    {
+        "id": "omb",
+        "name": "Ambae, East"
+    },
+    {
+        "id": "ory",
+        "name": "Oriya"
+    },
+    {
+        "id": "pan",
+        "name": "Panjabi, Eastern"
+    },
+    {
+        "id": "peg",
+        "name": "Pengo"
+    },
+    {
+        "id": "pol",
+        "name": "Polish"
+    },
+    {
+        "id": "por",
+        "name": "Portuguese"
+    },
+    {
+        "id": "poy",
+        "name": "Shipogoro"
+    },
+    {
+        "id": "rmc",
+        "name": "Romani, Carpathian"
+    },
+    {
+        "id": "rmn",
+        "name": "Romani, Balkan"
+    },
+    {
+        "id": "rmy",
+        "name": "Romani, Vlax"
+    },
+    {
+        "id": "ruf",
+        "name": "Chilughuru"
+    },
+    {
+        "id": "san",
+        "name": "Sanskrit"
+    },
+    {
+        "id": "sby",
+        "name": "Soli"
+    },
+    {
+        "id": "sch",
+        "name": "Sakachep"
+    },
+    {
+        "id": "shj",
+        "name": "Shatt"
+    },
+    {
+        "id": "sna",
+        "name": "Shona"
+    },
+    {
+        "id": "spa",
+        "name": "Spanish"
+    },
+    {
+        "id": "spm",
+        "name": "Akukem"
+    },
+    {
+        "id": "srp",
+        "name": "Serbian"
+    },
+    {
+        "id": "sus",
+        "name": "Susu"
+    },
+    {
+        "id": "swe",
+        "name": "Swedish"
+    },
+    {
+        "id": "swh",
+        "name": "Swahili"
+    },
+    {
+        "id": "tam",
+        "name": "Tamil"
+    },
+    {
+        "id": "taw",
+        "name": "Tay"
+    },
+    {
+        "id": "tel",
+        "name": "Telugu"
+    },
+    {
+        "id": "tgj",
+        "name": "Tagin"
+    },
+    {
+        "id": "tha",
+        "name": "Thai"
+    },
+    {
+        "id": "tod",
+        "name": "Toma"
+    },
+    {
+        "id": "ton",
+        "name": "Tonga (Tonga Islands)"
+    },
+    {
+        "id": "tvt",
+        "name": "Tutsa Naga"
+    },
+    {
+        "id": "twi",
+        "name": "Twi"
+    },
+    {
+        "id": "ukr",
+        "name": "Ukrainian"
+    },
+    {
+        "id": "unx",
+        "name": "Munda"
+    },
+    {
+        "id": "urd",
+        "name": "Urdu"
+    },
+    {
+        "id": "urw",
+        "name": "Sop"
+    },
+    {
+        "id": "vid",
+        "name": "Vidunda"
+    },
+    {
+        "id": "vie",
+        "name": "Vietnamese"
+    },
+    {
+        "id": "yal",
+        "name": "Yalunka"
+    },
+    {
+        "id": "yao",
+        "name": "Yao"
+    },
+    {
+        "id": "yap",
+        "name": "Yapese"
+    },
+    {
+        "id": "yor",
+        "name": "Yoruba"
+    },
+    {
+        "id": "zaj",
+        "name": "Zaramo"
+    },
+    {
+        "id": "ziw",
+        "name": "Zigua"
+    }
+]

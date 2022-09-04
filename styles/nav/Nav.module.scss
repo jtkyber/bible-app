@@ -1,0 +1,28 @@
+@import '../variables';
+
+.container {
+    background-color: $red_brown;
+    box-shadow: 0 0 1rem 0 rgba($color: $red_brown_dark, $alpha: 1.0);
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    overflow: visible;
+    z-index: 100;
+    color: $light_grey;
+
+    .left {
+
+    }
+
+    .mid {
+
+    }
+
+    .right {
+
+    }
+}

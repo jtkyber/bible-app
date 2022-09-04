@@ -1,0 +1,18 @@
+.container {
+  display: -ms-grid;
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -ms-grid-rows: max-content 1fr;
+      grid-template-rows: -webkit-max-content 1fr;
+      grid-template-rows: max-content 1fr;
+}
+
+.container main {
+  width: 100%;
+  height: 100%;
+  color: #56667A;
+}
+/*# sourceMappingURL=Layout.module.css.map */
