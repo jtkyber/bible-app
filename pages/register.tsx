@@ -19,7 +19,7 @@ const Register: NextPage = () => {
     }, [])
 
     const handleLangOptionClick = (e): void => {
-        if (e.target) setLangSelected(e.target?.value)
+        if (e.target?.value !== 'Language') setLangSelected(e.target?.value)
     }
 
     const handleSubmit = async (e) => {
@@ -66,17 +66,21 @@ const Register: NextPage = () => {
                         }
                     </select>
 
-                    <select id='version' name='version' defaultValue='Bible Version' required>
-                        <option value='Bible Version' disabled hidden>Bible Version</option>
-                        {
-                            bibles.map(bible => {
-                                if (bible.language.id === langSelected) {
-                                    return <option key={bible.id} value={bible.id}>{bible.abbreviation}</option>
-                                }
-                                return
-                            })
-                        }
-                    </select>
+                    {
+                        langSelected !== undefined ?
+                        <select id='version' name='version' defaultValue='Bible Version' required>
+                            <option value='Bible Version' disabled hidden>Bible Version</option>
+                            {
+                                bibles.map(bible => {
+                                    if (bible.language.id === langSelected) {
+                                        return <option key={bible.id} value={bible.id}>{bible.abbreviation}</option>
+                                    }
+                                    return
+                                })
+                            }
+                        </select>
+                        : null
+                    }
                 </div>
 
                 <button className={logRegStyles.submitBtn} value='submit'>Submit</button>
