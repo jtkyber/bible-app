@@ -10,7 +10,6 @@ import { setUser } from '../redux/userSlice'
 import { useRouter } from 'next/router'
 
 const Register: NextPage = () => {
-    // const [langSelected, setLangSelected] = useState('')
     const [availableBibles, setAvailableBibles] = useState([])
     const dispatch = useAppDispatch()
     const router = useRouter()
@@ -22,6 +21,7 @@ const Register: NextPage = () => {
     const handleLangOptionClick = (e): void => {
         const langSelected = e.target?.value
         const biblesTemp: any = []
+        
         if (langSelected !== 'Language') {
             for (const bible of bibles) {
                 if (bible.language.id === langSelected) {
@@ -67,7 +67,7 @@ const Register: NextPage = () => {
                 <input id='password' type='password' placeholder='Password' required></input>
 
                 <div className={logRegStyles.langAndVersion}>
-                    <select onClick={handleLangOptionClick} id='lang' name='language' defaultValue='Language' required>
+                    <select onChange={handleLangOptionClick} id='lang' name='language' defaultValue='Language' required>
                         <option value='Language' disabled hidden>Language</option>
                         {
                             languages.map(lang => (
