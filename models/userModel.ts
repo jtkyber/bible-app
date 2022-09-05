@@ -18,8 +18,8 @@ export interface ICategories {
 export interface IUser {
     username: string,
     password: string,
-    passages?: IPassages[],
-    categories?: ICategories[],
+    passages: IPassages[],
+    categories: ICategories[],
     language: string,
     bibleVersion: string
 }
@@ -58,6 +58,6 @@ const userSchema = new Schema<IUser>({
     bibleVersion: String
 })
 
-const User = models.User || model('User', userSchema, "users");
+const User = models.User1 || model('User1', userSchema, "users");
 
 export default User;

@@ -22,4 +22,30 @@
   z-index: 100;
   color: #CECCCC;
 }
+
+.container .left h1 {
+  cursor: pointer;
+  -webkit-transition: opacity ease-out 0.15s;
+  transition: opacity ease-out 0.15s;
+}
+
+.container .left h1:hover {
+  opacity: 0.6;
+}
+
+.container .right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+}
+
+.container .right a {
+  -webkit-transition: opacity ease-out 0.15s;
+  transition: opacity ease-out 0.15s;
+}
+
+.container .right a:hover {
+  opacity: 0.6;
+}
 /*# sourceMappingURL=Nav.module.css.map */

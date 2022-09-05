@@ -1,6 +1,6 @@
 import footerStyles from '../styles/footer/Footer.module.scss'
 
-const NavBar: React.FC = () => {
+const Footer: React.FC = () => {
     return (
         <div className={footerStyles.container}>
 
@@ -8,4 +8,4 @@ const NavBar: React.FC = () => {
     );
 };
 
-export default NavBar;
+export default Footer;

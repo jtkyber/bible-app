@@ -15,7 +15,10 @@
     color: $light_grey;
 
     .left {
-
+        h1 {
+            cursor: pointer;
+            @include fadeOnHover;
+        }
     }
 
     .mid {
@@ -23,6 +26,11 @@
     }
 
     .right {
+        display: flex;
+        gap: 1rem;
 
+        a {
+            @include fadeOnHover;
+        }
     }
 }

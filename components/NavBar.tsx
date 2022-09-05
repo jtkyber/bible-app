@@ -12,13 +12,12 @@ const NavBar: React.FC = () => {
 
     const logOut = (): void => {
         dispatch(clearUser())
-        router.reload()
     }
 
     return (
         <div className={navStyles.container}>
             <div className={navStyles.left}>
-                <h1>Bible App</h1>
+                <h1 onClick={() => router.push('/')}>Bible App</h1>
             </div>
             <div className={navStyles.mid}>
 
@@ -30,8 +29,21 @@ const NavBar: React.FC = () => {
                         router.pathname === '/login'
                         ? <Link href='/register'><a>Register</a></Link>
                         : <Link href='/login'><a>Log In</a></Link>
-                    : 
+                    : router.pathname === '/'
+                    ?
+                    <>
+                        <Link href='/bible'><a>Find Passage</a></Link>
+                        <Link href='/login'><a>Settings</a></Link>
                         <a onClick={logOut}>Log Out</a>
+                    </>
+                    : router.pathname === '/bible'
+                    ? 
+                    <>
+                        <Link href='/'><a>Back</a></Link>
+                        <a onClick={logOut}>Log Out</a>
+                    </>
+                    : null
+
                 }
             </div>
         </div>

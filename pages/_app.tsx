@@ -1,5 +1,7 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
+import { Provider } from 'react-redux'
+import store from '../redux/store'
 import Layout from '../components/Layout'
 import '../styles/globals.scss'
 
@@ -9,9 +11,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <Head>
         <title>Bible App</title>
       </Head>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <Provider store={store}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </Provider>
     </>
   )
 }
