@@ -20,7 +20,9 @@
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
-  height: 20rem;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -96,6 +98,30 @@
 
 .container form .langAndVersion select option {
   color: #1b0d09;
+}
+
+.container form .bibleSelected {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  max-width: 17rem;
+}
+
+.container form .bibleSelected h5 {
+  color: #1b0d09;
+  font-weight: 400;
+}
+
+.container form .bibleSelected h4 {
+  color: #1b0d09;
+  text-align: center;
 }
 
 .container form .submitBtn {
