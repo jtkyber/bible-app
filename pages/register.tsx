@@ -10,16 +10,26 @@ import { setUser } from '../redux/userSlice'
 import { useRouter } from 'next/router'
 
 const Register: NextPage = () => {
-    const [langSelected, setLangSelected] = useState()
-    const dispatch = useAppDispatch();
-    const router = useRouter();
+    // const [langSelected, setLangSelected] = useState('')
+    const [availableBibles, setAvailableBibles] = useState([])
+    const dispatch = useAppDispatch()
+    const router = useRouter()
 
     useEffect(() => {
         router.prefetch('/')
     }, [])
 
     const handleLangOptionClick = (e): void => {
-        if (e.target?.value !== 'Language') setLangSelected(e.target?.value)
+        const langSelected = e.target?.value
+        const biblesTemp: any = []
+        if (langSelected !== 'Language') {
+            for (const bible of bibles) {
+                if (bible.language.id === langSelected) {
+                    biblesTemp.push(bible)
+                }
+            }
+            setAvailableBibles(biblesTemp)
+        }
     }
 
     const handleSubmit = async (e) => {
@@ -66,21 +76,14 @@ const Register: NextPage = () => {
                         }
                     </select>
 
-                    {
-                        langSelected !== undefined ?
-                        <select id='version' name='version' defaultValue='Bible Version' required>
-                            <option value='Bible Version' disabled hidden>Bible Version</option>
-                            {
-                                bibles.map(bible => {
-                                    if (bible.language.id === langSelected) {
-                                        return <option key={bible.id} value={bible.id}>{bible.abbreviation}</option>
-                                    }
-                                    return
-                                })
-                            }
-                        </select>
-                        : null
-                    }
+                    <select id='version' name='version' defaultValue='Bible Version' required>
+                        <option value='Bible Version' disabled hidden>Bible Version</option>
+                        {
+                            availableBibles.map((bible: any) => (
+                                    <option key={bible.id} value={bible.id}>{bible.abbreviation}</option>
+                            ))
+                        }
+                    </select>
                 </div>
 
                 <button className={logRegStyles.submitBtn} value='submit'>Submit</button>
