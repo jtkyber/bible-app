@@ -9,6 +9,34 @@
     .selectors {
         width: $side_panel_width;
         border-right: 0.2rem solid black;
+
+        .bookContainer {
+            height: 15rem;
+
+            h3 {
+                text-align: center;
+            }
+
+            .books {
+                height: 100%;
+                overflow: scroll;
+                overflow-x: hidden;
+                display: flex;
+                flex-flow: column nowrap;
+
+                h5 {
+                    padding: 0.5rem 1rem;
+                    border-top: 0.1rem solid rgba($color: $red_brown, $alpha: 1.0);
+
+                    &:first-child {
+                    border-top: none;
+
+                    }
+                }
+
+                @include customScrollbar;
+            }
+        }
     }
 
     .content {
