@@ -18,7 +18,7 @@ const Bible: NextPage = () => {
             }
         })
 
-        console.log(res.data)
+        console.log(res.data.data)
     }
 
     return (

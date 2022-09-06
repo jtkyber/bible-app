@@ -10,7 +10,7 @@ import { setUser } from '../redux/userSlice'
 import { useRouter } from 'next/router'
 
 const Register: NextPage = () => {
-    const [availableBibles, setAvailableBibles] = useState([])
+    const [availableBibles, setAvailableBibles]: any[] = useState([])
     const [selectedBible, setSelectedBible] = useState('')
     const dispatch = useAppDispatch()
     const router = useRouter()
@@ -18,6 +18,17 @@ const Register: NextPage = () => {
 
     useEffect(() => {
         router.prefetch('/')
+
+        languages.sort((a, b) => {
+            if (a.name < b.name) return -1
+            if (a.name > b.name) return 1
+            return 0
+        })
+
+        const engIndex = languages.findIndex(el => el.name == 'English')
+        const removedObject = languages[engIndex] 
+        languages.splice(engIndex, 1)
+        languages.unshift(removedObject)
     }, [])
 
     const handleLangOptionClick = (e): void => {
@@ -51,6 +62,18 @@ const Register: NextPage = () => {
                     }
                 }
             })
+
+            biblesTemp.sort((a, b) => {
+                if (a.abbreviation < b.abbreviation) return -1
+                if (a.abbreviation > b.abbreviation) return 1
+                return 0
+            })
+
+            setSelectedBible(biblesTemp[0].name)
+            if (versionSelectRef.current.value === 'Bible Version') {
+                versionSelectRef.current.value = biblesTemp[0].abbreviation
+            }
+
             setAvailableBibles(biblesTemp)
         }
     }
