@@ -40,6 +40,7 @@ const NavBar: React.FC = () => {
                     ? 
                     <>
                         <Link href='/'><a>Back</a></Link>
+                        <Link href='/login'><a>Settings</a></Link>
                         <a onClick={logOut}>Log Out</a>
                     </>
                     : null

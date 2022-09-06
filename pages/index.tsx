@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
-import styles from '../styles/home/Home.module.scss'
 import {  useAppSelector } from '../redux/hooks'
+import styles from '../styles/home/Home.module.scss'
 
 const Home: NextPage = () => {
   const user = useAppSelector(state => state.user)

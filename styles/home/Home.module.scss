@@ -8,7 +8,7 @@
     flex-flow: row nowrap;
 
     .categories {
-        width: 15rem;
+        width: $side_panel_width;
         border-right: 0.2rem solid black;
     }
 

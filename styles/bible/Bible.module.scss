@@ -4,4 +4,14 @@
     width: 100%;
     height: 100%;
     background-color: $light_grey;
+    display: flex;
+
+    .selectors {
+        width: $side_panel_width;
+        border-right: 0.2rem solid black;
+    }
+
+    .content {
+
+    }
 }

@@ -2,5 +2,13 @@
   width: 100%;
   height: 100%;
   background-color: #CECCCC;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.container .selectors {
+  width: 15rem;
+  border-right: 0.2rem solid black;
 }
 /*# sourceMappingURL=Bible.module.css.map */
