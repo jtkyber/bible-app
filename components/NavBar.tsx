@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import Link from 'next/link';
 import navStyles from '../styles/nav/Nav.module.scss'
 import { clearUser } from '../redux/userSlice';
+import { clearBible } from '../redux/bibleSlice';
 
 const NavBar: React.FC = () => {
     const user = useAppSelector(state => state.user)
@@ -12,6 +13,7 @@ const NavBar: React.FC = () => {
 
     const logOut = (): void => {
         dispatch(clearUser())
+        dispatch(clearBible())
     }
 
     return (

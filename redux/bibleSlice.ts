@@ -23,9 +23,15 @@ export const biblesSlice = createSlice({
         setSelectedBook: (state, action: PayloadAction<IBook>) => {
             state.selectedBook = action.payload
         },
+        clearBible: (state) => {
+            state.selectedBook = {
+                name: '',
+                id: ''
+            }
+        },
     }
 })
 
-export const { setSelectedBook } = biblesSlice.actions
+export const { setSelectedBook, clearBible } = biblesSlice.actions
 
 export default biblesSlice.reducer
