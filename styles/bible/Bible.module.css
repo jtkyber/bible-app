@@ -48,9 +48,10 @@
 .container .selectors .bookContainer .bookBtn.active {
   -webkit-box-shadow: inset 0 0 0.3rem 0 black;
           box-shadow: inset 0 0 0.3rem 0 black;
+  font-size: 1rem;
 }
 
-.container .selectors .bookContainer .bookBtn:hover {
+.container .selectors .bookContainer .bookBtn:hover:not(.active) {
   -webkit-box-shadow: inset 0 0 0.3rem 0 black;
           box-shadow: inset 0 0 0.3rem 0 black;
   font-size: 1rem;
