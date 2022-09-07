@@ -3,7 +3,8 @@ $red_brown_dark: #1b0d09;
 $light_grey: #CECCCC;
 $moss_green: #748E54;
 $grey_blue: #56667A;
-$side_panel_width: 15rem;
+$side_panel_width: 17rem;
+$selector_width: 80%;
 
 @mixin fadeOnHover {
     transition: opacity ease-out 0.15s;
