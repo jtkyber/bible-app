@@ -7,22 +7,50 @@
     display: flex;
 
     .selectors {
+        height: 100%;
         width: $side_panel_width;
         border-right: 0.2rem solid black;
+        display: flex;
+        flex-flow: column nowrap;
 
         .bookContainer {
-            height: 15rem;
+            height: 50vh;
+            cursor: pointer;
 
-            h3 {
+            .bookBtn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 text-align: center;
+                height: 4rem;
+                margin: 1rem;
+                margin-bottom: 0;
+                box-shadow: 0 0 0.3rem 0 rgba($color: #000000, $alpha: 1.0);
+                border-radius: 0.5rem;
+                font-size: 1.05rem;
+
+                &.active {
+                    box-shadow: inset 0 0 0.3rem 0 rgba($color: #000000, $alpha: 1.0);
+                }
+                
+                &:hover {
+                    box-shadow: inset 0 0 0.3rem 0 rgba($color: #000000, $alpha: 1.0);
+                    font-size: 1rem;
+                }
             }
 
             .books {
-                height: 100%;
-                overflow: scroll;
+                height: 0;
+                margin: 0 1rem;
+                overflow: auto;
                 overflow-x: hidden;
                 display: flex;
                 flex-flow: column nowrap;
+                box-shadow: 0 0 0.3rem 0 rgba($color: #000000, $alpha: 1.0);
+                
+                &.show {
+                    height: 100%;
+                }
 
                 h5 {
                     padding: 0.5rem 1rem;
@@ -32,6 +60,11 @@
                     border-top: none;
 
                     }
+
+                    &:hover {
+                        background-color: rgba($color: $red_brown, $alpha: 1.0);
+                        color: rgba($color: $light_grey, $alpha: 1.0);
+                    }
                 }
 
                 @include customScrollbar;
@@ -40,6 +73,6 @@
     }
 
     .content {
-
+        background-color: inherit;
     }
 }

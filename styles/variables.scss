@@ -21,7 +21,9 @@ $side_panel_width: 15rem;
     &::-webkit-scrollbar-track {
       background-color: transparent;
       border: 0.1rem solid rgba($color: $red_brown, $alpha: 1.0);
-      border-radius: 0.5rem;
+      border-top: none;
+      border-bottom: none;
+    //   border-radius: 0.5rem;
     }
     
     &::-webkit-scrollbar-thumb {
