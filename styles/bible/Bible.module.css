@@ -2,14 +2,17 @@
   width: 100%;
   height: 100%;
   background-color: #CECCCC;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 17rem 1fr;
+      grid-template-columns: 17rem 1fr;
+  -ms-grid-rows: 1fr;
+      grid-template-rows: 1fr;
 }
 
 .container .selectors {
   height: 100%;
-  width: 17rem;
+  width: 100%;
   border-right: 0.2rem solid black;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -23,6 +26,8 @@
           justify-content: flex-start;
   gap: 1rem;
   padding-top: 2rem;
+  padding-bottom: 2rem;
+  overflow: hidden;
 }
 
 .container .selectors .selectorContainer {
@@ -110,8 +115,7 @@
 }
 
 .container .selectors .selectorContainer .options::-webkit-scrollbar {
-  width: 0.7rem;
-  display: block;
+  width: 1rem;
 }
 
 .container .selectors .selectorContainer .options::-webkit-scrollbar-track {
@@ -130,13 +134,156 @@
   background: rgba(69, 33, 23, 0.6);
 }
 
+.container .selectors .selectorContainer .options::-webkit-scrollbar {
+  width: 0.7rem;
+}
+
 .container .selectors .selectorContainer .options::-webkit-scrollbar-track {
   background-color: transparent;
   border: none;
   border-left: 0.1rem solid #452117;
 }
 
+.container .selectors .versesLabel {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-weight: 400;
+}
+
+.container .selectors .verseSelection {
+  width: 80%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin: 0 auto;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  -webkit-box-shadow: inset 0 0 0.3rem 0 black;
+          box-shadow: inset 0 0 0.3rem 0 black;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.container .selectors .verseSelection::-webkit-scrollbar {
+  width: 1rem;
+}
+
+.container .selectors .verseSelection::-webkit-scrollbar-track {
+  background-color: transparent;
+  border: 0.1rem solid #452117;
+  border-top: none;
+  border-bottom: none;
+}
+
+.container .selectors .verseSelection::-webkit-scrollbar-thumb {
+  background: #452117;
+  border-radius: 0.5rem;
+}
+
+.container .selectors .verseSelection::-webkit-scrollbar-thumb:hover {
+  background: rgba(69, 33, 23, 0.6);
+}
+
+.container .selectors .verseSelection::-webkit-scrollbar {
+  width: 0.7rem;
+}
+
+.container .selectors .verseSelection::-webkit-scrollbar-track {
+  background-color: transparent;
+  border: none;
+  border-left: 0.1rem solid #452117;
+}
+
+.container .selectors .verseSelection h5 {
+  background-color: #452117;
+  -webkit-box-shadow: 0 0 0.15rem 0 black;
+          box-shadow: 0 0 0.15rem 0 black;
+  color: #CECCCC;
+  border-radius: 0.5rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  -webkit-transition: opacity ease-out 0.1s;
+  transition: opacity ease-out 0.1s;
+}
+
+.container .selectors .verseSelection h5.highlight {
+  background-color: #748E54;
+  -webkit-box-shadow: 0 0 0.15rem 0 #344026;
+          box-shadow: 0 0 0.15rem 0 #344026;
+}
+
+.container .selectors .verseSelection h5:hover {
+  opacity: 0.6;
+}
+
 .container .content {
-  background-color: inherit;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  padding: 2rem;
+  gap: 0.1rem;
+}
+
+.container .content::-webkit-scrollbar {
+  width: 1rem;
+}
+
+.container .content::-webkit-scrollbar-track {
+  background-color: transparent;
+  border: 0.1rem solid #452117;
+  border-top: none;
+  border-bottom: none;
+}
+
+.container .content::-webkit-scrollbar-thumb {
+  background: #452117;
+  border-radius: 0.5rem;
+}
+
+.container .content::-webkit-scrollbar-thumb:hover {
+  background: rgba(69, 33, 23, 0.6);
+}
+
+.container .content span {
+  cursor: pointer;
+}
+
+.container .content span.highlight {
+  background-color: rgba(116, 142, 84, 0.6);
+}
+
+.container .content span .verseNum {
+  vertical-align: super;
+  font-size: smaller;
 }
 /*# sourceMappingURL=Bible.module.css.map */

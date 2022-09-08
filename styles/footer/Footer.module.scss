@@ -1,8 +1,8 @@
 @import '../variables';
 
 .container {
-    height: 2rem;
-    width: 100%;
+    height: $footer_height;
+    width: 100vw;
     background-color: hsl(13, 50%, 12%);
     box-shadow: 0 0 0.5rem 0 $red_brown_dark;
     z-index: 100;

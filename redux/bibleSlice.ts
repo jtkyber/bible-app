@@ -5,29 +5,31 @@ interface IBook {
     id: string
 }
 
-interface IChapter {
-    number: string,
-    id: string
+interface IPassage {
+    id: string[],
+    number: number[]
 }
 
 interface InitialState {
     books: any[]
     chapters: any[]
+    verses: string[]
     selectedBook: IBook
-    selectedChapter: IChapter
+    selectedPassage: IPassage
 }
 
-const initialState: InitialState = {
+export const initialState: InitialState = {
     books: [],
     chapters: [],
+    verses: [],
     selectedBook: {
         name: '',
         id: ''
     },
-    selectedChapter: {
-        number: '',
-        id: ''
-    }
+    selectedPassage: {
+        id: [],
+        number: []
+    },
 }
 
 export const biblesSlice = createSlice({
@@ -38,22 +40,25 @@ export const biblesSlice = createSlice({
             state.books = action.payload
         },
         setChapters: (state, action: PayloadAction<any[]>) => {
-            state.chapters = action.payload
+            state.chapters = action.payload.filter(chap => parseInt(chap.number))
+        },
+        setVerses: (state, action: PayloadAction<string[]>) => {
+            state.verses = action.payload
         },
         setSelectedBook: (state, action: PayloadAction<IBook>) => {
             state.selectedBook = action.payload
         },
-        setSelectedChapter: (state, action: PayloadAction<IChapter>) => {
-            state.selectedChapter = action.payload
+        setSelectedPassage: (state, action: PayloadAction<IPassage>) => {
+            state.selectedPassage = action.payload
         },
         clearBible: (state) => {
             state.books = []
-            state.selectedBook = { name: '', id: '' }
-            state.selectedChapter = { number: '', id: '' }
+            state.selectedBook = initialState.selectedBook
+            state.selectedPassage = initialState.selectedPassage
         },
     }
 })
 
-export const { setBooks, setChapters, setSelectedBook, setSelectedChapter, clearBible } = biblesSlice.actions
+export const { setBooks, setChapters, setVerses, setSelectedBook, setSelectedPassage, clearBible } = biblesSlice.actions
 
 export default biblesSlice.reducer

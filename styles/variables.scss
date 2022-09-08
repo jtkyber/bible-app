@@ -5,6 +5,8 @@ $moss_green: #748E54;
 $grey_blue: #56667A;
 $side_panel_width: 17rem;
 $selector_width: 80%;
+$nav_height: 5rem;
+$footer_height: 3rem;
 
 @mixin fadeOnHover {
     transition: opacity ease-out 0.15s;
@@ -15,8 +17,7 @@ $selector_width: 80%;
 
 @mixin customScrollbar($display: block) {
     &::-webkit-scrollbar {
-      width: 0.7rem;
-      display: $display;
+      width: 1rem;
     }
     
     &::-webkit-scrollbar-track {
@@ -34,6 +35,19 @@ $selector_width: 80%;
         &:hover {
             background: rgba($color: $red_brown, $alpha: 0.6);
         }
+    }
+  }
+
+  @mixin miniScrollbar {
+    @include customScrollbar();
+    &::-webkit-scrollbar {
+        width: 0.7rem;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: transparent;
+        border: none;
+        border-left: 0.1rem solid rgba($color: $red_brown, $alpha: 1.0);
     }
   }
   

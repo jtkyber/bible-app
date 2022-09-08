@@ -4,17 +4,21 @@
     width: 100%;
     height: 100%;
     background-color: $light_grey;
-    display: flex;
+    display: grid;
+    grid-template-columns: $side_panel_width 1fr;
+    grid-template-rows: 1fr;
 
     .selectors {
         height: 100%;
-        width: $side_panel_width;
+        width: 100%;
         border-right: 0.2rem solid black;
         display: flex;
         flex-flow: column nowrap;
         justify-content: flex-start;
         gap: 1rem;
         padding-top: 2rem;
+        padding-bottom: 2rem;
+        overflow: hidden;
 
         .selectorContainer {
             position: relative;
@@ -29,8 +33,6 @@
                 width: $selector_width;
                 height: 4rem;
                 margin: auto;
-                // margin: 1rem;
-                // margin-bottom: 0;
                 box-shadow: 0 0 0.3rem 0 rgba($color: #000000, $alpha: 1.0);
                 border-radius: 0.5rem;
                 font-size: 1.05rem;
@@ -59,7 +61,6 @@
                 flex-flow: column nowrap;
                 box-shadow: 0 0 0.3rem 0 rgba($color: #000000, $alpha: 1.0);
                 border-radius: 0.5rem;
-                // border-top-right-radius: 0.5rem;
                 transition: max-height ease-out 0.2s;
                 background-color: $light_grey;
                 z-index: 11;
@@ -84,18 +85,80 @@
                     }
                 }
                 
-                @include customScrollbar;
+                @include miniScrollbar();
+            }
+        }
 
-                &::-webkit-scrollbar-track {
-                    background-color: transparent;
-                    border: none;
-                    border-left: 0.1rem solid rgba($color: $red_brown, $alpha: 1.0);
+        .versesLabel {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-weight: 400;
+        }
+
+        .verseSelection {
+            width: $selector_width;
+            height: 100%;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+            margin: 0 auto;
+            gap: 1rem;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            box-shadow: inset 0 0 0.3rem 0 rgba($color: #000000, $alpha: 1.0);
+            overflow: scroll;
+            overflow-x: hidden;
+            @include miniScrollbar();
+
+            h5 {
+                background-color: rgba($color: $red_brown, $alpha: 1.0);
+                box-shadow: 0 0 0.15rem 0 rgba($color: #000000, $alpha: 1.0);
+                color: $light_grey;
+                border-radius: 0.5rem;
+                width: 2.2rem;
+                height: 2.2rem;
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                transition: opacity ease-out 0.1s;
+
+                &.highlight {
+                    background-color: $moss_green;
+                    box-shadow: 0 0 0.15rem 0 rgba($color: hsl(87, 26%, 20%), $alpha: 1.0);
+                }
+
+                &:hover {   
+                    opacity: 0.6;
                 }
             }
         }
     }
 
     .content {
-        background-color: inherit;
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        display: flex;
+        flex-flow: column nowrap;
+        padding: 2rem;
+        gap: 0.1rem;
+
+        @include customScrollbar;
+        
+        span {
+            cursor: pointer;
+
+            &.highlight {
+                background-color: rgba($color: $moss_green, $alpha: 0.6);
+            }
+
+            .verseNum {
+                vertical-align: super;
+                font-size: smaller;
+            }
+        }
     }
 }
