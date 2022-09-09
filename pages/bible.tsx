@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useAppSelector, useAppDispatch } from '../redux/hooks'
 import { initialState, setBooks, setChapters, setVerses, setSelectedBook, setSelectedPassage } from '../redux/bibleSlice'
 import bibleStyles from '../styles/bible/Bible.module.scss'
+import { setUser } from '../redux/userSlice'
 
 const Bible: NextPage = () => {
     const user = useAppSelector(state => state.user)
@@ -20,7 +21,6 @@ const Bible: NextPage = () => {
     useEffect(() => {
         const content = contentRef.current
         const chapterBtn = chapterBtnRef.current
-        if (user.bibleVersion) fetchBooks()
 
         return () => {
             dispatch(setVerses(initialState.verses))
@@ -29,6 +29,10 @@ const Bible: NextPage = () => {
             chapterBtn.innerText = 'Choose Chapter'
         }
     }, [])
+
+    useEffect(() => {
+        if (user?.bibleVersion) fetchBooks()
+    }, [user?.bibleVersion])
 
     useEffect(() => {
         document.addEventListener('click', handlePageClick)
@@ -42,19 +46,21 @@ const Bible: NextPage = () => {
         highlightVerses()
     }, [bible.selectedPassage])
 
-
+    //-----Toggle book selector dropdown-----
     const toggleBookList = () => {
         bookBtnRef.current.classList.toggle(bibleStyles.active)
         bookDropRef.current.classList.toggle(bibleStyles.show)
     }
 
+    //-----Toggle chapter selector dropdown-----
     const toggleChapterList = () => {
         chapterBtnRef.current.classList.toggle(bibleStyles.active)
         chapterDropRef.current.classList.toggle(bibleStyles.show)
     }
 
+    //-----Add and remove highlighting of selected verses-----
     const highlightVerses = () => {
-        //verse selectors
+        //-----Verse selectors-----
         const verses = document.querySelectorAll(`.${bibleStyles.verseNum}`)
         for (let i=0; i<verses.length; i++) {
             const verse = verses[i] as HTMLElement | null
@@ -73,7 +79,7 @@ const Bible: NextPage = () => {
             }
         }
 
-        //verse text
+        //-----Verse text-----
         const verseTextList = document.querySelectorAll('[data-verse-id]')
         for (let i=0; i<verseTextList.length; i++) {
             const verseText = verseTextList[i] as HTMLElement | null
@@ -99,7 +105,7 @@ const Bible: NextPage = () => {
     }
 
     const handlePageClick = (e) => {
-        //close all dropdowns
+        //-----Close all dropdowns-----
         const btns = document.querySelectorAll(`.${bibleStyles.selectorBtn}`)
         const options = document.querySelectorAll(`.${bibleStyles.options}`)
         for (let i = 0; i < options.length; i++) {
@@ -109,7 +115,7 @@ const Bible: NextPage = () => {
             }
         }
         
-        //select verse
+        //-----Compare clicked verse with saved verse(s) and adjust saved verse(s) accordingly-----
         const clickedID = e.target?.dataset?.verseIdSelector
         const clickedNum = parseInt(e.target?.dataset?.verseNumber)
         const savedID = bible.selectedPassage.id
@@ -133,29 +139,19 @@ const Bible: NextPage = () => {
                         id: [savedID[0], clickedID],
                         number: [savedNum[0], clickedNum]
                     })) 
+                } else if (clickedNum == savedNum[0]) {
+                    dispatch(setSelectedPassage(initialState.selectedPassage))
                 }
             } else if (savedNum.length == 2) {
-                if (clickedNum < savedNum[0]) {
-                    dispatch(setSelectedPassage({
-                        id: [clickedID, savedID[1]],
-                        number: [clickedNum, savedNum[1]]
-                    })) 
-                } else if ((clickedNum >= savedNum[0]) && (clickedNum <= savedNum[1])) {
-                    dispatch(setSelectedPassage({
-                        id: [clickedID],
-                        number: [clickedNum]
-                    }))
-                } else if ((clickedNum > savedNum[1])) {
-                    dispatch(setSelectedPassage({
-                        id: [savedID[0], clickedID],
-                        number: [savedNum[0], clickedNum]
-                    })) 
-                }
+                dispatch(setSelectedPassage({
+                    id: [clickedID],
+                    number: [clickedNum]
+                }))
             }
         } 
     }
 
-
+    //-----Fetch list of all books based on bible version and save to state-----
     const fetchBooks = async () => {
         const res = await axios.get(`https://api.scripture.api.bible/v1/bibles/${user.bibleVersion}/books`, {
             headers: {
@@ -165,6 +161,7 @@ const Bible: NextPage = () => {
         dispatch(setBooks(res.data.data))
     }
 
+    //-----Fetch list of all chapters based on bible version and book and save to state-----
     const fetchChapters = async (bookID) => {
         const res = await axios.get(`https://api.scripture.api.bible/v1/bibles/${user.bibleVersion}/books/${bookID}/chapters`, {
             headers: {
@@ -174,6 +171,8 @@ const Bible: NextPage = () => {
         dispatch(setChapters(res.data.data))
     }
 
+    //-----Fetch chapter based on bible version and chapter id-----
+    //-----Save verses in chapter object to state-----
     const fetchChapter = async (chapterID) => {
         const queryParams = 'include-verse-spans=true'
          const res = await axios.get(`https://api.scripture.api.bible/v1/bibles/${user.bibleVersion}/chapters/${chapterID}?${queryParams}`, {
@@ -190,21 +189,64 @@ const Bible: NextPage = () => {
         dispatch(setVerses(versesTemp))
     }
 
+    //-----Save passage to database-----
+    const savePassageToDb = async (e) => {
+        if (!bible.selectedPassage.id.length) return
+        const passage = 
+        bible.selectedPassage.id.length == 2 ? `${bible.selectedPassage.id[0]}-${bible.selectedPassage.id[1]}`
+        : bible.selectedPassage.id.length == 1 ? `${bible.selectedPassage.id[0]}` : null
+        
+        const res = await axios.post('/api/postVerse', {
+            username: user.username,
+            psgID: passage
+        })
+
+        if (res?.data?._id) {
+            dispatch(setUser(res.data))
+            localStorage.setItem('user', JSON.stringify(res?.data))
+
+            e.target.innerText = 'Saved'
+            setTimeout(() => {
+                dispatch(setSelectedPassage(initialState.selectedPassage))
+            }, 1000)
+        }
+
+    }
+
+    //-----Fetch passage object-----
+    // const fetchPassage = async () => {
+    //     if (!bible.selectedPassage.id.length) return
+
+    //     const queryParams = 'include-verse-spans=true'
+    //     const passageID = bible.selectedPassage.id.length == 1 ? `${bible.selectedPassage.id[0]}` : `${bible.selectedPassage.id[0]}-${bible.selectedPassage.id[1]}`
+        
+    //     const res = await axios.get(`https://api.scripture.api.bible/v1/bibles/${user.bibleVersion}/passages/${passageID}?${queryParams}`, {
+    //         headers: {
+    //             'api-key': `${process.env.API_KEY}`
+    //         }
+    //     })
+
+    //     console.log(res.data)
+    // }
+
+    //-----Reset state verses, state selected passage, content text and chapterBtn text-----
+    //-----Set selected book state and fetch chapters with book id-----
     const handleBookClick = (book) => {
-        dispatch(setSelectedBook({
-            name: book.name,
-            id: book.id
-        }))
         dispatch(setVerses(initialState.verses))
         dispatch(setSelectedPassage(initialState.selectedPassage))
         contentRef.current.innerHTML = ''
         chapterBtnRef.current.innerText = 'Choose Chapter'
+        dispatch(setSelectedBook({
+            name: book.name,
+            id: book.id
+        }))
         fetchChapters(book.id)
     }
 
+    //-----Reset state selected passage / set chapter btn text / fetch chapter with chapter id-----
     const handleChapterClick = (chapter) => {
-        chapterBtnRef.current.innerText = chapter.number
         dispatch(setSelectedPassage(initialState.selectedPassage))
+        chapterBtnRef.current.innerText = chapter.number
         fetchChapter(chapter.id)
     }
 
@@ -233,7 +275,19 @@ const Bible: NextPage = () => {
                     </div>
                 </div>
 
-                <h5 className={bibleStyles.versesLabel}>Select Verse or Range of Verses</h5>
+                <h5 className={bibleStyles.versesLabel}>{
+                    bible.selectedPassage.id[1]
+                    ? bible.selectedPassage.id[0] + '-' + bible.selectedPassage.id[1]
+                    : bible.selectedPassage.id[0]
+                        ? bible.selectedPassage.id[0]
+                        : 'Select Verse or Range of Verses'
+                }</h5>
+
+                {
+                    bible.selectedPassage.id.length 
+                    ? <button onClick={savePassageToDb} className={bibleStyles.savePsgBtn}>Save Passage</button>
+                    : null
+                }
 
                 <div className={bibleStyles.verseSelection}>
                     {

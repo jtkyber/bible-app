@@ -96,10 +96,13 @@ const Register: NextPage = () => {
                 version
             })
 
-            const newUser: (IUser & any) = res.data;
-            dispatch(setUser(newUser))
-
-            if (newUser._id.length) router.replace('/')
+            const newUser: IUser = res.data
+            
+            if (newUser?._id?.length) {
+                dispatch(setUser(newUser))
+                localStorage.setItem('user', JSON.stringify(newUser))
+                router.replace('/')
+            }
         } catch (err) {
             console.log(err)
         }

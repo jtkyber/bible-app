@@ -1,41 +1,37 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { IUser } from "../models/userModel"
 
-interface InitialState extends IUser {
-    id: string
-}
-
-const initialState: InitialState = {
+const initialState: IUser = {
+    _id: '',
     username: '',
     password: '',
     categories: [],
     passages: [],
     language: '',
     bibleVersion: '',
-    id: ''
 }
 
 export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setUser: (state, action: PayloadAction<IUser & any>) => {
+        setUser: (state, action: PayloadAction<IUser>) => {
+            state._id = action.payload._id
             state.username = action.payload.username
             state.password = action.payload.password
             state.categories = action.payload.categories
             state.passages = action.payload.passages
             state.language = action.payload.language
             state.bibleVersion = action.payload.bibleVersion
-            state.id = action.payload._id
         },
         clearUser: (state) => {
+            state._id = ''
             state.username = ''
             state.password = ''
             state.categories = []
             state.passages = []
             state.language = ''
             state.bibleVersion = ''
-            state.id = ''
         },
     }
 })

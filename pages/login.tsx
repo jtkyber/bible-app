@@ -27,10 +27,13 @@ const Login: NextPage = () => {
                 password
             })
 
-            const user: (IUser & any) = res.data;
-            dispatch(setUser(user))
-
-            if (user._id.length) router.replace('/')
+            const user: IUser = res.data;
+            
+            if (user?._id?.length) {
+                dispatch(setUser(user))
+                localStorage.setItem('user', JSON.stringify(user))
+                router.replace('/')
+            }
         } catch (err) {
             console.log(err)
         }

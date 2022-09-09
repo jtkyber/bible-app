@@ -24,7 +24,9 @@
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  gap: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding-top: 2rem;
   padding-bottom: 2rem;
   overflow: hidden;
@@ -32,10 +34,12 @@
 
 .container .selectors .selectorContainer {
   position: relative;
+  width: 100%;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
   cursor: pointer;
+  margin-bottom: 1rem;
 }
 
 .container .selectors .selectorContainer .selectorBtn {
@@ -50,7 +54,7 @@
           align-items: center;
   text-align: center;
   width: 80%;
-  height: 4rem;
+  height: 3rem;
   margin: auto;
   -webkit-box-shadow: 0 0 0.3rem 0 black;
           box-shadow: 0 0 0.3rem 0 black;
@@ -146,8 +150,33 @@
 
 .container .selectors .versesLabel {
   text-align: center;
-  margin-top: 0.5rem;
   font-weight: 400;
+}
+
+.container .selectors .savePsgBtn {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 0.2rem 0.3rem;
+  border: none;
+  border-radius: 0.5rem;
+  outline: none;
+  background-color: #748E54;
+  cursor: pointer;
+  -webkit-box-shadow: 0 0 0.2rem 0.05rem #27301d;
+          box-shadow: 0 0 0.2rem 0.05rem #27301d;
+  color: #CECCCC;
+  -webkit-transition: opacity ease-out 0.15s;
+  transition: opacity ease-out 0.15s;
+  font-weight: 600;
+  margin-top: 0.3rem;
+}
+
+.container .selectors .savePsgBtn:hover {
+  opacity: 0.6;
 }
 
 .container .selectors .verseSelection {
@@ -162,13 +191,13 @@
           flex-flow: row wrap;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  margin: 0 auto;
+  margin: 0.5rem auto;
   gap: 1rem;
   border-radius: 0.5rem;
   padding: 0.5rem;
   -webkit-box-shadow: inset 0 0 0.3rem 0 black;
           box-shadow: inset 0 0 0.3rem 0 black;
-  overflow: scroll;
+  overflow: auto;
   overflow-x: hidden;
 }
 
@@ -202,7 +231,7 @@
   border-left: 0.1rem solid #452117;
 }
 
-.container .selectors .verseSelection h5 {
+.container .selectors .verseSelection .verseNum {
   background-color: #452117;
   -webkit-box-shadow: 0 0 0.15rem 0 black;
           box-shadow: 0 0 0.15rem 0 black;
@@ -228,13 +257,13 @@
   transition: opacity ease-out 0.1s;
 }
 
-.container .selectors .verseSelection h5.highlight {
+.container .selectors .verseSelection .verseNum.highlight {
   background-color: #748E54;
-  -webkit-box-shadow: 0 0 0.15rem 0 #344026;
-          box-shadow: 0 0 0.15rem 0 #344026;
+  -webkit-box-shadow: 0 0 0.15rem 0 #27301d;
+          box-shadow: 0 0 0.15rem 0 #27301d;
 }
 
-.container .selectors .verseSelection h5:hover {
+.container .selectors .verseSelection .verseNum:hover {
   opacity: 0.6;
 }
 
@@ -274,15 +303,11 @@
   background: rgba(69, 33, 23, 0.6);
 }
 
-.container .content span {
-  cursor: pointer;
-}
-
 .container .content span.highlight {
   background-color: rgba(116, 142, 84, 0.6);
 }
 
-.container .content span .verseNum {
+.container .content span [data-number] {
   vertical-align: super;
   font-size: smaller;
 }

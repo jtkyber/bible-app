@@ -12,6 +12,7 @@ const NavBar: React.FC = () => {
     const dispatch = useAppDispatch()
 
     const logOut = (): void => {
+        localStorage.setItem('user', '')
         dispatch(clearUser())
         dispatch(clearBible())
     }
@@ -26,7 +27,7 @@ const NavBar: React.FC = () => {
             </div>
             <div className={navStyles.right}>
                 {
-                    !user.id.length 
+                    !user?._id?.length 
                     ?
                         router.pathname === '/login'
                         ? <Link href='/register'><a>Register</a></Link>
