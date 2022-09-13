@@ -13,6 +13,7 @@ export default async function handler(
     try {
         const { username, selectedCat, categories, allPassages = false } = req.query;
         await connectMongo();
+        console.log(username)
 
         if (!allPassages && typeof categories === 'string') {
             const passageList: any = []
