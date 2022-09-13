@@ -190,20 +190,22 @@ const Bible: NextPage = () => {
     }
 
     //-----Save passage to database-----
-    const savePassageToDb = async (e) => {
-        if (!bible.selectedPassage.id.length) return
-        const passage = 
-        bible.selectedPassage.id.length == 2 ? `${bible.selectedPassage.id[0]}-${bible.selectedPassage.id[1]}`
-        : bible.selectedPassage.id.length == 1 ? `${bible.selectedPassage.id[0]}` : null
+    const savePassageToDb = async (data, e) => {
+        // if (!bible.selectedPassage.id.length) return
+        // const passage = 
+        // bible.selectedPassage.id.length == 2 ? `${bible.selectedPassage.id[0]}-${bible.selectedPassage.id[1]}`
+        // : bible.selectedPassage.id.length == 1 ? `${bible.selectedPassage.id[0]}` : null
         
         const res = await axios.post('/api/postVerse', {
             username: user.username,
-            psgID: passage
+            content: data.content,
+            psgID: data.id,
+            reference: data.reference,
         })
 
         if (res?.data?._id) {
             dispatch(setUser(res.data))
-            localStorage.setItem('user', JSON.stringify(res?.data))
+            // localStorage.setItem('user', JSON.stringify(res?.data))
 
             e.target.innerText = 'Saved'
             setTimeout(() => {
@@ -214,20 +216,20 @@ const Bible: NextPage = () => {
     }
 
     //-----Fetch passage object-----
-    // const fetchPassage = async () => {
-    //     if (!bible.selectedPassage.id.length) return
+    const fetchPassage = async (e) => {
+        if (!bible.selectedPassage.id.length) return
 
-    //     const queryParams = 'include-verse-spans=true'
-    //     const passageID = bible.selectedPassage.id.length == 1 ? `${bible.selectedPassage.id[0]}` : `${bible.selectedPassage.id[0]}-${bible.selectedPassage.id[1]}`
+        const queryParams = 'include-verse-spans=true'
+        const passageID = bible.selectedPassage.id.length == 1 ? `${bible.selectedPassage.id[0]}` : `${bible.selectedPassage.id[0]}-${bible.selectedPassage.id[1]}`
         
-    //     const res = await axios.get(`https://api.scripture.api.bible/v1/bibles/${user.bibleVersion}/passages/${passageID}?${queryParams}`, {
-    //         headers: {
-    //             'api-key': `${process.env.API_KEY}`
-    //         }
-    //     })
+        const res = await axios.get(`https://api.scripture.api.bible/v1/bibles/${user.bibleVersion}/passages/${passageID}?${queryParams}`, {
+            headers: {
+                'api-key': `${process.env.API_KEY}`
+            }
+        })
 
-    //     console.log(res.data)
-    // }
+        savePassageToDb(res.data.data, e)
+    }
 
     //-----Reset state verses, state selected passage, content text and chapterBtn text-----
     //-----Set selected book state and fetch chapters with book id-----
@@ -254,22 +256,22 @@ const Bible: NextPage = () => {
         <div className={bibleStyles.container}>
             <div className={bibleStyles.selectors}>
                 <div className={bibleStyles.selectorContainer} id='bookContainer'>
-                    <h3 ref={bookBtnRef} onClick={toggleBookList} className={bibleStyles.selectorBtn} id='bookBtn'>{bible.selectedBook.name ? bible.selectedBook.name : 'Choose Book'}</h3>
+                    <button ref={bookBtnRef} onClick={toggleBookList} className={bibleStyles.selectorBtn} id='bookBtn'>{bible.selectedBook.name ? bible.selectedBook.name : 'Choose Book'}</button>
                     <div ref={bookDropRef} className={bibleStyles.options} id='books'>
                     {
                         bible.books.map((book, i) => (
-                            <h5 onClick={() => handleBookClick(book)} key={i}>{book.name}</h5>
+                            <button onClick={() => handleBookClick(book)} key={i}>{book.name}</button>
                         ))
                     }
                     </div>
                 </div>
 
                 <div className={bibleStyles.selectorContainer} id='chapterContainer'>
-                    <h3 ref={chapterBtnRef} onClick={toggleChapterList} className={bibleStyles.selectorBtn} id='chapterBtn'>Choose Chapter</h3>
+                    <button ref={chapterBtnRef} onClick={toggleChapterList} className={bibleStyles.selectorBtn} id='chapterBtn'>Choose Chapter</button>
                     <div ref={chapterDropRef} className={bibleStyles.options} id='chapters'>
                     {
                         bible.chapters.map((chapter, i) => (
-                            <h5 onClick={() => handleChapterClick(chapter)} key={i}>{chapter.number}</h5>
+                            <button onClick={() => handleChapterClick(chapter)} key={i}>{chapter.number}</button>
                         ))
                     }
                     </div>
@@ -285,14 +287,14 @@ const Bible: NextPage = () => {
 
                 {
                     bible.selectedPassage.id.length 
-                    ? <button onClick={savePassageToDb} className={bibleStyles.savePsgBtn}>Save Passage</button>
+                    ? <button onClick={fetchPassage} className={bibleStyles.savePsgBtn}>Save Passage</button>
                     : null
                 }
 
                 <div className={bibleStyles.verseSelection}>
                     {
                         bible.verses.map((verse, i) => (
-                            <h5 className={bibleStyles.verseNum} key={i} data-verse-id-selector={verse} data-verse-number={i+1}>{i + 1}</h5>
+                            <button className={bibleStyles.verseNum} key={i} data-verse-id-selector={verse} data-verse-number={i+1}>{i + 1}</button>
                         ))
                     }
                 </div>

@@ -3,17 +3,18 @@ import { Schema, model, models, Types } from "mongoose";
 // Interfaces
 
 export interface IPassages {
+    content: string
     id: string
+    reference: string
     notes: string
 }
 
 export interface ICategories {
     name: string
-    passageIDs: Types.ObjectId[]
+    passageIDs?: Types.ObjectId[]
 }
 
 export interface IUser {
-    _id: string;
     username: string
     password: string
     passages: IPassages[]
@@ -26,7 +27,9 @@ export interface IUser {
 // Sub Schemas
 
 const passageSchema = new Schema<IPassages>({
+    content: String,
     id: String,
+    reference: String,
     notes: String
 })
 
@@ -38,7 +41,6 @@ const categorySchema = new Schema<ICategories>({
 // Main Schema
 
 const userSchema = new Schema<IUser>({
-    _id: String,
     username: {
         type: String,
         required: true,
@@ -54,6 +56,6 @@ const userSchema = new Schema<IUser>({
     bibleVersion: String
 })
 
-const User = models.User6 || model('User6', userSchema, "users");
+const User = models.User8 || model('User8', userSchema, "users");
 
 export default User;

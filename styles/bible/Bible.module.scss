@@ -11,15 +11,14 @@
     .selectors {
         height: 100%;
         width: 100%;
-        border-right: 0.2rem solid black;
         display: flex;
         flex-flow: column nowrap;
         justify-content: flex-start;
         align-items: center;
-        // gap: 1rem;
         padding-top: 2rem;
         padding-bottom: 2rem;
         overflow: hidden;
+        box-shadow: 0 0 0.5rem 0 black;
 
         .selectorContainer {
             position: relative;
@@ -37,9 +36,11 @@
                 height: $selector_height;
                 margin: auto;
                 box-shadow: 0 0 0.3rem 0 rgba($color: #000000, $alpha: 1.0);
+                border: none;
                 border-radius: 0.5rem;
                 font-size: 1.05rem;
                 z-index: 10;
+                background-color: inherit;
 
                 &.active {
                     box-shadow: inset 0 0 0.3rem 0 rgba($color: #000000, $alpha: 1.0);
@@ -73,16 +74,17 @@
                     max-height: 50vh;
                 }
 
-                h5 {
+                button {
                     padding: 0.5rem 1rem;
+                    border: none;
                     border-top: 0.1rem solid rgba($color: $red_brown, $alpha: 1.0);
+                    background-color: inherit;
                     
                     &:first-child {
-                    border-top: none;
-
-                }
+                        border-top: none;
+                    }
                 
-                &:hover {
+                    &:hover {
                         background-color: rgba($color: $red_brown, $alpha: 1.0);
                         color: rgba($color: $light_grey, $alpha: 1.0);
                     }
@@ -136,6 +138,7 @@
                 background-color: rgba($color: $red_brown, $alpha: 1.0);
                 box-shadow: 0 0 0.15rem 0 rgba($color: #000000, $alpha: 1.0);
                 color: $light_grey;
+                border: none;
                 border-radius: 0.5rem;
                 width: 2.2rem;
                 height: 2.2rem;

@@ -26,8 +26,10 @@ export default async function handler(
                         res.json(newUser)
                     } else {
                         if (error.code === 11000) {
-                            res.status(400).end('Username already exists')
-                        } else res.status(400).end('Unable to add user')
+                            throw new Error('Username already exists')
+                        } else {
+                            throw new Error(error)
+                        }
                     }
                 });
             })

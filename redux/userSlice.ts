@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { IUser } from "../models/userModel"
 
-const initialState: IUser = {
+export interface IUserState extends IUser {
+    _id: string
+}
+
+const initialState: (IUserState) = {
     _id: '',
     username: '',
     password: '',
@@ -15,7 +19,7 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setUser: (state, action: PayloadAction<IUser>) => {
+        setUser: (state, action: PayloadAction<IUserState>) => {
             state._id = action.payload._id
             state.username = action.payload.username
             state.password = action.payload.password

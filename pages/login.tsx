@@ -1,10 +1,9 @@
 import { NextPage } from 'next'
 import React, { useEffect } from 'react'
 import axios from 'axios'
-import { IUser } from '../models/userModel'
 import { useAppDispatch } from '../redux/hooks'
 import logRegStyles from '../styles/logReg/logReg.module.scss'
-import { setUser } from '../redux/userSlice'
+import { IUserState, setUser } from '../redux/userSlice'
 import { useRouter } from 'next/router'
 
 const Login: NextPage = () => {
@@ -27,11 +26,11 @@ const Login: NextPage = () => {
                 password
             })
 
-            const user: IUser = res.data;
+            const user: IUserState = res.data;
             
             if (user?._id?.length) {
                 dispatch(setUser(user))
-                localStorage.setItem('user', JSON.stringify(user))
+                // localStorage.setItem('user', JSON.stringify(user))
                 router.replace('/')
             }
         } catch (err) {

@@ -19,9 +19,12 @@ const Layout = ({ children }: {children: React.ReactNode}) => {
     }, [])
 
     useEffect(() => {
-        if (user?._id?.length) return
-        const userFromStorage = localStorage.getItem('user')
-        if (!userFromStorage) router.replace('/login')
+        if (user?._id?.length) {
+            localStorage.setItem('user', JSON.stringify(user))
+        } else {
+            const userFromStorage = localStorage.getItem('user')
+            if (!userFromStorage) router.replace('/login')
+        }
     }, [user])
 
     return (

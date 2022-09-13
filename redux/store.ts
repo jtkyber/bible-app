@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import user from './userSlice'
 import bible from './bibleSlice'
+import catPassage from './catPassageSlice'
 
 export const store = configureStore({
     reducer: {
         user: user,
-        bible: bible
+        bible: bible,
+        catPassage: catPassage
     }
 })
 

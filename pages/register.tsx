@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
-import { IUser } from '../models/userModel'
+import { IUserState } from '../redux/userSlice'
 import { useAppDispatch } from '../redux/hooks'
 import logRegStyles from '../styles/logReg/logReg.module.scss'
 import bibles from '../bibles.json'
@@ -96,11 +96,11 @@ const Register: NextPage = () => {
                 version
             })
 
-            const newUser: IUser = res.data
+            const newUser: IUserState = res.data
             
             if (newUser?._id?.length) {
                 dispatch(setUser(newUser))
-                localStorage.setItem('user', JSON.stringify(newUser))
+                // localStorage.setItem('user', JSON.stringify(newUser))
                 router.replace('/')
             }
         } catch (err) {
