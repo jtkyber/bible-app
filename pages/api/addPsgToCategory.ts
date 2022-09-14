@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import connectMongo from '../../utils/connectDB'
-import User, { IPassages } from '../../models/userModel'
+import User from '../../models/userModel'
 
 type Data = {
   name: string
