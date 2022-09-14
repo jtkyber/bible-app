@@ -13,7 +13,6 @@
 .container .selectors {
   height: 100%;
   width: 100%;
-  border-right: 0.2rem solid black;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -30,6 +29,8 @@
   padding-top: 2rem;
   padding-bottom: 2rem;
   overflow: hidden;
+  -webkit-box-shadow: 0 0 0.5rem 0 black;
+          box-shadow: 0 0 0.5rem 0 black;
 }
 
 .container .selectors .selectorContainer {
@@ -58,9 +59,11 @@
   margin: auto;
   -webkit-box-shadow: 0 0 0.3rem 0 black;
           box-shadow: 0 0 0.3rem 0 black;
+  border: none;
   border-radius: 0.5rem;
   font-size: 1.05rem;
   z-index: 10;
+  background-color: inherit;
 }
 
 .container .selectors .selectorContainer .selectorBtn.active {
@@ -104,16 +107,18 @@
   max-height: 50vh;
 }
 
-.container .selectors .selectorContainer .options h5 {
+.container .selectors .selectorContainer .options button {
   padding: 0.5rem 1rem;
+  border: none;
   border-top: 0.1rem solid #452117;
+  background-color: inherit;
 }
 
-.container .selectors .selectorContainer .options h5:first-child {
+.container .selectors .selectorContainer .options button:first-child {
   border-top: none;
 }
 
-.container .selectors .selectorContainer .options h5:hover {
+.container .selectors .selectorContainer .options button:hover {
   background-color: #452117;
   color: #cecccc;
 }
@@ -169,10 +174,10 @@
   -webkit-box-shadow: 0 0 0.2rem 0.05rem #27301d;
           box-shadow: 0 0 0.2rem 0.05rem #27301d;
   color: #CECCCC;
-  -webkit-transition: opacity ease-out 0.15s;
-  transition: opacity ease-out 0.15s;
   font-weight: 600;
   margin-top: 0.3rem;
+  -webkit-transition: opacity ease-out 0.15s;
+  transition: opacity ease-out 0.15s;
 }
 
 .container .selectors .savePsgBtn:hover {
@@ -236,6 +241,7 @@
   -webkit-box-shadow: 0 0 0.15rem 0 black;
           box-shadow: 0 0 0.15rem 0 black;
   color: #CECCCC;
+  border: none;
   border-radius: 0.5rem;
   width: 2.2rem;
   height: 2.2rem;
@@ -253,18 +259,18 @@
       -ms-flex-align: center;
           align-items: center;
   cursor: pointer;
-  -webkit-transition: opacity ease-out 0.1s;
-  transition: opacity ease-out 0.1s;
+  -webkit-transition: opacity ease-out 0.15s;
+  transition: opacity ease-out 0.15s;
+}
+
+.container .selectors .verseSelection .verseNum:hover {
+  opacity: 0.6;
 }
 
 .container .selectors .verseSelection .verseNum.highlight {
   background-color: #748E54;
   -webkit-box-shadow: 0 0 0.15rem 0 #27301d;
           box-shadow: 0 0 0.15rem 0 #27301d;
-}
-
-.container .selectors .verseSelection .verseNum:hover {
-  opacity: 0.6;
 }
 
 .container .content {

@@ -1,4 +1,4 @@
-import { Schema, model, models, Types } from "mongoose";
+import { Schema, model, models } from "mongoose";
 
 // Interfaces
 
@@ -11,7 +11,7 @@ export interface IPassages {
 
 export interface ICategories {
     name: string
-    passageIDs?: Types.ObjectId[]
+    passageIDs?: string[]
 }
 
 export interface IUser {
@@ -35,7 +35,7 @@ const passageSchema = new Schema<IPassages>({
 
 const categorySchema = new Schema<ICategories>({
     name: String,
-    passageIDs: [Schema.Types.ObjectId]
+    passageIDs: [String]
 })
 
 // Main Schema
@@ -51,11 +51,14 @@ const userSchema = new Schema<IUser>({
         required: true
     },
     passages: [passageSchema],
-    categories: [categorySchema],
+    categories: {
+        type: [categorySchema],
+        index: true
+    },
     language: String,
     bibleVersion: String
 })
 
-const User = models.User8 || model('User8', userSchema, "users");
+const User = models.User12 || model('User12', userSchema, "users");
 
 export default User;

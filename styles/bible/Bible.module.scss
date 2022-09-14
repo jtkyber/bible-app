@@ -110,13 +110,9 @@
             cursor: pointer;
             box-shadow: 0 0 0.2rem 0.05rem $moss_green_shadow;
             color: $light_grey;
-            transition: opacity ease-out 0.15s;
             font-weight: 600;
             margin-top: 0.3rem;
-
-            &:hover {
-                opacity: 0.6;
-            }
+            @include fadeOnHover;
         }
 
         .verseSelection {
@@ -147,15 +143,11 @@
                 justify-content: center;
                 align-items: center;
                 cursor: pointer;
-                transition: opacity ease-out 0.1s;
+                @include fadeOnHover;
 
                 &.highlight {
                     background-color: $moss_green;
                     box-shadow: 0 0 0.15rem 0 rgba($color: $moss_green_shadow, $alpha: 1.0);
-                }
-
-                &:hover {   
-                    opacity: 0.6;
                 }
             }
         }

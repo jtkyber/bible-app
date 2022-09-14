@@ -17,6 +17,7 @@
   background-color: inherit;
   padding: 2rem 0;
   overflow: auto;
+  z-index: 10;
 }
 
 .container .categories::-webkit-scrollbar {
@@ -166,8 +167,8 @@
       -ms-flex-align: center;
           align-items: center;
   cursor: pointer;
-  -webkit-transition: opacity ease-out 0.1s;
-  transition: opacity ease-out 0.1s;
+  -webkit-transition: opacity ease-out 0.15s;
+  transition: opacity ease-out 0.15s;
 }
 
 .container .categories .addCatContainer .addCatBtn:hover {
@@ -186,12 +187,98 @@
   -webkit-box-direction: normal;
       -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
+  background-color: inherit;
+}
+
+.container .passages .passagesHeader {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  -webkit-box-shadow: 0 0 0.5rem 0 black;
+          box-shadow: 0 0 0.5rem 0 black;
+  background-color: inherit;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  min-height: 5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.container .passages .passagesHeader .optionContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.container .passages .passagesHeader .optionContainer * {
+  padding: 0 1rem;
+  -webkit-transition: opacity ease-out 0.15s;
+  transition: opacity ease-out 0.15s;
+}
+
+.container .passages .passagesHeader .optionContainer *:hover {
+  opacity: 0.6;
+}
+
+.container .passages .passagesHeader .optionContainer button {
+  border: none;
+  background-color: transparent;
+  color: #539108;
+  font-weight: 800;
+}
+
+.container .passages .passagesHeader .selectedPsgName {
+  width: 100%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  text-align: center;
+  font-weight: 200;
+}
+
+.container .passages .passage {
   padding: 2rem;
-  gap: 2rem;
+  padding-top: 0;
+}
+
+.container .passages .passage.addingPassage {
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: "input verseRef" "input verseContent";
+  -ms-grid-columns: 1.5rem 1fr;
+      grid-template-columns: 1.5rem 1fr;
+  gap: 0 1rem;
+}
+
+.container .passages .passage input {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  grid-area: input;
 }
 
 .container .passages .passage h4 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: verseRef;
   font-weight: bold;
+}
+
+.container .passages .passage .content {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: verseContent;
 }
 
 .container .passages .passage .content [data-number] {

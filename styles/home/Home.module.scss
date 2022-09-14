@@ -14,6 +14,7 @@
         background-color: inherit;
         padding: 2rem 0;
         overflow: auto;
+        z-index: 10;
 
         @include customScrollbar;
 
@@ -94,12 +95,7 @@
                 justify-content: center;
                 align-items: center;
                 cursor: pointer;
-                transition: opacity ease-out 0.1s;
-
-                
-                &:hover {
-                    opacity: 0.6;
-                }
+                @include fadeOnHover;
             }
         }
     }
@@ -111,15 +107,71 @@
         overflow-y: auto;
         display: flex;
         flex-flow: column nowrap;
-        padding: 2rem;
-        gap: 2rem;
+        background-color: inherit;
+
+        .passagesHeader {
+            position: sticky;
+            top: 0;
+            box-shadow: 0 0 0.5rem 0 black;
+            background-color: inherit;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            min-height: 5rem;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: flex-end;
+
+            .optionContainer {
+                display: flex;
+                justify-content: flex-end;
+
+                * {
+                    padding: 0 1rem;
+
+                    @include fadeOnHover;
+                }
+    
+                button {
+                    border: none;
+                    background-color: transparent;
+                    color: $moss_green_vibrant;
+                    font-weight: 800;
+                }
+            }
+    
+            .selectedPsgName {
+                width: 100%;
+                height: max-content;
+                text-align: center;
+                font-weight: 200;
+            }
+
+        }
 
         .passage {
+            padding: 2rem;
+            padding-top: 0;
+
+            &.addingPassage {
+                display: grid;
+                grid-template-areas: 
+                "input verseRef"
+                "input verseContent";
+                grid-template-columns: 1.5rem 1fr;
+                gap: 0 1rem;
+            }
+
+            input {
+                grid-area: input;
+            }
+
             h4 {
-                font-weight: bold
+                grid-area: verseRef;
+                font-weight: bold;
             }
 
             .content {
+                grid-area: verseContent;
                 [data-number] {
                     vertical-align: super;
                     font-size: smaller;

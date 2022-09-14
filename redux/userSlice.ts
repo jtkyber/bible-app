@@ -1,11 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { IUser } from "../models/userModel"
+import { ICategories, IPassages } from "../models/userModel"
 
-export interface IUserState extends IUser {
+export interface ICatState extends ICategories {
     _id: string
 }
 
-const initialState: (IUserState) = {
+export interface IUserState {
+    _id: string,
+    username: string,
+    password: string,
+    categories: ICatState[],
+    passages: IPassages[],
+    language: string,
+    bibleVersion: string,
+}
+
+const initialState: IUserState = {
     _id: '',
     username: '',
     password: '',

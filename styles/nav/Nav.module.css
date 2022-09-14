@@ -3,7 +3,7 @@
   -webkit-box-shadow: 0 0 1rem 0 #1b0d09;
           box-shadow: 0 0 1rem 0 #1b0d09;
   width: 100vw;
-  height: 4rem;
+  height: 5rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -30,7 +30,7 @@
 }
 
 .container .left h1:hover {
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .container .right {
@@ -46,6 +46,6 @@
 }
 
 .container .right a:hover {
-  opacity: 0.7;
+  opacity: 0.6;
 }
 /*# sourceMappingURL=Nav.module.css.map */
