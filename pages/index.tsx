@@ -100,7 +100,7 @@ const Home: NextPage = () => {
 
       const queryParams = `username=${user.username}&catName=${categories.selectedCat.name}`
       const res2 = await axios.get(`/api/getPassages?${queryParams}`)
-      
+
       if (res2?.data?.[0]?._id) {
         dispatch(setSelectedCatPassages(res2.data))
       } else dispatch(setSelectedCatPassages([]))

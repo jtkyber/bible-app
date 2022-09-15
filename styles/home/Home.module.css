@@ -219,23 +219,29 @@
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 0.5rem;
 }
 
-.container .passages .passagesHeader .optionContainer * {
-  padding: 0 1rem;
+.container .passages .passagesHeader .optionContainer button {
+  padding: 0.5rem 0.5rem 0 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  -webkit-box-shadow: 0 0 0.25rem 0 #27301d;
+          box-shadow: 0 0 0.25rem 0 #27301d;
+  background-color: #539108;
+  color: #CECCCC;
+  font-weight: 800;
   -webkit-transition: opacity ease-out 0.15s;
   transition: opacity ease-out 0.15s;
 }
 
-.container .passages .passagesHeader .optionContainer *:hover {
+.container .passages .passagesHeader .optionContainer button:hover {
   opacity: 0.6;
-}
-
-.container .passages .passagesHeader .optionContainer button {
-  border: none;
-  background-color: transparent;
-  color: #539108;
-  font-weight: 800;
 }
 
 .container .passages .passagesHeader .selectedPsgName {

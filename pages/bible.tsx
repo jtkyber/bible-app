@@ -31,6 +31,14 @@ const Bible: NextPage = () => {
     }, [])
 
     useEffect(() => {
+        bookDropRef?.current?.children[0]?.click()
+    }, [bible.books])
+
+    useEffect(() => {
+        chapterDropRef?.current?.children[0]?.click()
+    }, [bible.chapters])
+
+    useEffect(() => {
         if (user?.bibleVersion) fetchBooks()
     }, [user?.bibleVersion])
 

@@ -13,8 +13,10 @@ const Passage = ({ passage }: { passage: IPassages }) => {
                 ?
                 <>
                     <input id={passage.id} type='checkbox'></input>
-                    <h4>{passage.reference}</h4>
-                    <div dangerouslySetInnerHTML={{__html: passage.content}} className={homeStyles.content}></div> 
+                    <label htmlFor={passage.id}>
+                        <h4>{passage.reference}</h4>
+                        <div dangerouslySetInnerHTML={{__html: passage.content}} className={homeStyles.content}></div> 
+                    </label>
                 </>
                 :
                 <>

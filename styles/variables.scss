@@ -8,8 +8,8 @@ $grey_blue: #56667A;
 $side_panel_width: 17rem;
 $selector_width: 80%;
 $selector_height: 3rem;
-$nav_height: 5rem;
-$footer_height: 3rem;
+$nav_height: 4rem;
+$footer_height: 2rem;
 
 @mixin fadeOnHover {
     transition: opacity ease-out 0.15s;
