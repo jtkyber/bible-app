@@ -2,15 +2,18 @@ import axios from 'axios'
 import type { NextPage } from 'next'
 import { useEffect, useRef } from 'react'
 import { IUserState, setUser } from '../redux/userSlice'
-import { initialState as initialCatState ,setAddingPassage, setPassagesNotInCat, setSelectedCat, setSelectedCatPassages } from '../redux/categoriesSlice'
+import { initialState as initialCatState, setPassagesNotInCat, setSelectedCat, setSelectedCatPassages } from '../redux/categoriesSlice'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import Passage from '../components/Passage'
+import CatNav from '../components/CatNav'
+import FlashCards from '../components/FlashCards'
 import homeStyles from '../styles/home/Home.module.scss'
-import { IPassages } from '../models/userModel'
+import { disableFlashCardMode } from '../redux/flashCardSlice'
 
 const Home: NextPage = () => {
   const user = useAppSelector(state => state.user)
   const categories = useAppSelector(state => state.categories)
+  const flashCards = useAppSelector(state => state.flashCards)
   const addCatBtnRef: React.MutableRefObject<any> = useRef(null)
   const dispatch = useAppDispatch()
 
@@ -29,6 +32,7 @@ const Home: NextPage = () => {
   const fetchPassages = async (e) => {
     try {
       if (categories.addingPassage) return
+      dispatch(disableFlashCardMode())
       const catName = e.target?.innerText
       let catObject: any = {}
       
@@ -87,47 +91,6 @@ const Home: NextPage = () => {
     dispatch(setSelectedCat(initialCatState.selectedCat))
   }
   
-  const addPassagesToCategory = async (selectedPsgs) => {
-    const res = await axios.post('/api/addPsgToCategory', {
-      username: user.username,
-      selectedPsgs: selectedPsgs,
-      catName: categories.selectedCat.name
-    })
-
-    if (res.data._id) {
-      dispatch(setUser(res.data))
-      dispatch(setAddingPassage(false))
-
-      const queryParams = `username=${user.username}&catName=${categories.selectedCat.name}`
-      const res2 = await axios.get(`/api/getPassages?${queryParams}`)
-
-      if (res2?.data?.[0]?._id) {
-        dispatch(setSelectedCatPassages(res2.data))
-      } else dispatch(setSelectedCatPassages([]))
-    }
-  }
-
-  const handleAddPsgClick = () => {
-    if (categories.addingPassage) {
-      const inputs = document.querySelectorAll(`.${homeStyles.passage} > input`)
-      const selectedPsgsTemp: (IPassages | any[]) = []
-      
-      for (let i = 0; i < inputs.length; i++) {
-        const input = inputs[i] as HTMLInputElement  | null
-        if (input?.checked) {
-          for (const psg of categories.passagesNotInCat) {
-            if (input.id == psg.id) {
-              selectedPsgsTemp.push(psg)
-            }
-          }
-        }
-      }
-
-      addPassagesToCategory(selectedPsgsTemp)
-
-    } else dispatch(setAddingPassage(true))
-  }
-
   return (
     <div className={homeStyles.container}>
       <div className={homeStyles.categories}>
@@ -141,24 +104,27 @@ const Home: NextPage = () => {
         </div>
       </div>
       
-      <div className={homeStyles.passages}>
+      <div className={homeStyles.passageContainer}>
         <div className={homeStyles.passagesHeader}>
-          <div className={homeStyles.optionContainer}>
-          {
-            categories.selectedCat.name.length ? <button onClick={handleAddPsgClick}>{ !categories.addingPassage ? 'Add Passages' : 'Save' }</button> : null
-          }
-          </div>
+          <CatNav />
           <h1 className={homeStyles.selectedPsgName}>{categories.selectedCat.name || 'All Passages'}</h1>
         </div>
 
         {
-          categories.addingPassage 
+          !flashCards.inFlashCardMode
           ?
-            categories.passagesNotInCat.map((psg, i) => <Passage key={i} passage={psg}/>)
-          :
-            categories.selectedCat.name.length 
-            ? categories.selectedCatPassages.map((psg, i) => <Passage key={i} passage={psg}/>)
-            : user?.passages.map((psg, i) => <Passage key={i} passage={psg}/>)
+            <div className={homeStyles.passages}>
+              {
+                categories.addingPassage 
+                ?
+                  categories.passagesNotInCat.map((psg, i) => <Passage key={i} passage={psg}/>)
+                :
+                  categories.selectedCat.name.length 
+                  ? categories.selectedCatPassages.map((psg, i) => <Passage key={i} passage={psg}/>)
+                  : user?.passages.map((psg, i) => <Passage key={i} passage={psg}/>)
+              }
+            </div>
+          : <FlashCards/>
         }
       </div>
     </div>

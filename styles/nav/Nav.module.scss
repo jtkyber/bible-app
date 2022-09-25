@@ -31,6 +31,15 @@
 
         a {
             @include fadeOnHover;
+
+            &.findPsgBtn {
+                background-color: rgba($color: $light_grey, $alpha: 0.9);
+                color: $red_brown;
+                padding: 0.2rem 0.5rem;
+                border-radius: 1rem;
+                line-height: 1.3rem;
+                font-weight: 600;
+            }
         }
     }
 }

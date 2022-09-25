@@ -38,7 +38,7 @@ export const categoriesSlice = createSlice({
         },
         setPassagesNotInCat: (state, action: PayloadAction<IPassages[]>) => {
             state.passagesNotInCat = action.payload
-        },
+        }
     }
 })
 

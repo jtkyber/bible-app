@@ -1,0 +1,185 @@
+.flashCardSection {
+  min-width: 100%;
+  height: 100%;
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: "leftArrow card rightArrow";
+  -ms-grid-columns: max-content 1fr max-content;
+      grid-template-columns: -webkit-max-content 1fr -webkit-max-content;
+      grid-template-columns: max-content 1fr max-content;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
+  position: relative;
+}
+
+.flashCardSection .arrow {
+  border: none;
+  width: 2rem;
+  height: 5rem;
+  background-color: transparent;
+  border: 0.2rem solid #56667A;
+  color: #56667A;
+  font-size: 1.5rem;
+  font-weight: 800;
+  -webkit-transition: opacity ease-out 0.15s;
+  transition: opacity ease-out 0.15s;
+}
+
+.flashCardSection .arrow:hover {
+  opacity: 0.6;
+}
+
+.flashCardSection .arrow.left {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: leftArrow;
+  -ms-grid-column-align: left;
+      justify-self: left;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.flashCardSection .arrow.right {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: rightArrow;
+  -ms-grid-column-align: right;
+      justify-self: right;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.flashCardSection .flashCard {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: card;
+  width: 70%;
+  max-width: 40rem;
+  aspect-ratio: 3/2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  overflow-y: auto;
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+.flashCardSection .flashCard::-webkit-scrollbar {
+  width: 1rem;
+}
+
+.flashCardSection .flashCard::-webkit-scrollbar-track {
+  background-color: transparent;
+  border: 0.1rem solid #452117;
+  border-top: none;
+  border-bottom: none;
+}
+
+.flashCardSection .flashCard::-webkit-scrollbar-thumb {
+  background: #452117;
+  border-radius: 0.5rem;
+}
+
+.flashCardSection .flashCard::-webkit-scrollbar-thumb:hover {
+  background: rgba(69, 33, 23, 0.6);
+}
+
+.flashCardSection .flashCard::-webkit-scrollbar {
+  width: 0.7rem;
+}
+
+.flashCardSection .flashCard::-webkit-scrollbar-track {
+  background-color: transparent;
+  border: none;
+  border-left: 0.1rem solid #452117;
+}
+
+.flashCardSection .flashCard::-webkit-scrollbar-track {
+  background-color: transparent;
+  border: none;
+}
+
+.flashCardSection .flashCard::-webkit-scrollbar-thumb {
+  background: #452117;
+  border-radius: 0.5rem;
+}
+
+.flashCardSection .flashCard::-webkit-scrollbar-thumb:hover {
+  background: rgba(69, 33, 23, 0.6);
+}
+
+@supports (overflow: overlay) {
+  .flashCardSection .flashCard {
+    overflow-y: overlay;
+  }
+  .flashCardSection .flashCard::-webkit-scrollbar-thumb {
+    background: rgba(206, 204, 204, 0.6);
+    border-radius: 0.5rem;
+  }
+  .flashCardSection .flashCard::-webkit-scrollbar-thumb:hover {
+    background: rgba(206, 204, 204, 0.4);
+  }
+}
+
+.flashCardSection .flashCard .psgRef, .flashCardSection .flashCard .psgContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 0.5rem;
+  width: 100%;
+  min-height: 100%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  pointer-events: none;
+  -webkit-transition: all 0.15s linear;
+  transition: all 0.15s linear;
+  padding: 2rem;
+}
+
+.flashCardSection .flashCard .psgRef {
+  background-color: #56667A;
+  color: #CECCCC;
+}
+
+.flashCardSection .flashCard .psgContent {
+  -webkit-transform: rotateY(-90deg);
+          transform: rotateY(-90deg);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  background-color: #748E54;
+  color: #1b0d09;
+}
+
+.flashCardSection .flashCard .psgContent [data-number] {
+  vertical-align: super;
+  font-size: smaller;
+}
+/*# sourceMappingURL=FlashCards.module.css.map */

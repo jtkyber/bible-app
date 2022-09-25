@@ -3,7 +3,7 @@
   -webkit-box-shadow: 0 0 1rem 0 #1b0d09;
           box-shadow: 0 0 1rem 0 #1b0d09;
   width: 100vw;
-  height: 5rem;
+  height: 4rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -47,5 +47,14 @@
 
 .container .right a:hover {
   opacity: 0.6;
+}
+
+.container .right a.findPsgBtn {
+  background-color: rgba(206, 204, 204, 0.9);
+  color: #452117;
+  padding: 0.2rem 0.5rem;
+  border-radius: 1rem;
+  line-height: 1.3rem;
+  font-weight: 600;
 }
 /*# sourceMappingURL=Nav.module.css.map */

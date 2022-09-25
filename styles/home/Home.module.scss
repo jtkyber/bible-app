@@ -100,7 +100,7 @@
         }
     }
 
-    .passages {
+    .passageContainer {
         width: 100%;
         height: 100%;
         overflow-x: hidden;
@@ -114,7 +114,6 @@
             top: 0;
             box-shadow: 0 0 0.5rem 0 black;
             background-color: inherit;
-            margin-bottom: 2rem;
             padding-bottom: 0.5rem;
             min-height: 5rem;
             display: flex;
@@ -128,6 +127,7 @@
                 top: 0;
                 right: 0;
                 margin-right: 0.5rem;
+                gap: 0.5rem;
     
                 button {
                     padding: 0.5rem 0.5rem 0 0.5rem;
@@ -152,33 +152,44 @@
 
         }
 
-        .passage {
-            padding: 2rem;
-            padding-top: 0;
+        .passages {
+            width: 100%;
+            height: 100%;
+            margin-top: 2rem;
 
-            &.addingPassage {
-                display: grid;
-                grid-template-areas: 
-                "input verseRef"
-                "input verseContent";
-                grid-template-columns: 1.5rem 1fr;
-                gap: 0 1rem;
+            &.flashCards {
+                width: 100%;
+                height: 100%;
             }
 
-            input {
-                grid-area: input;
-            }
-
-            h4 {
-                grid-area: verseRef;
-                font-weight: bold;
-            }
-
-            .content {
-                grid-area: verseContent;
-                [data-number] {
-                    vertical-align: super;
-                    font-size: smaller;
+            .passage {
+                padding: 2rem;
+                padding-top: 0;
+    
+                &.addingPassage {
+                    display: grid;
+                    grid-template-areas: 
+                    "input verseRef"
+                    "input verseContent";
+                    grid-template-columns: 1.5rem 1fr;
+                    gap: 0 1rem;
+                }
+    
+                input {
+                    grid-area: input;
+                }
+    
+                h4 {
+                    grid-area: verseRef;
+                    font-weight: bold;
+                }
+    
+                .content {
+                    grid-area: verseContent;
+                    [data-number] {
+                        vertical-align: super;
+                        font-size: smaller;
+                    }
                 }
             }
         }
