@@ -5,21 +5,33 @@ import flashCardStyles from '../styles/flashCards/FlashCards.module.scss'
 const FlashCards: React.FC = () => {
     const flashCards = useAppSelector(state => state.flashCards)
     const dispatch = useAppDispatch()
+    const halfFlipTime = 800
+    const flipTimingFirstHalf = 'cubic-bezier(.5,0,1,1)'
+    const flipTimingSecondHalf = 'cubic-bezier(0,0,.5,1)'
+
+    // const flipTimingFirstHalf = 'ease-in'
+    // const flipTimingSecondHalf = 'ease-out'
 
     const flipCard = (e) => {
         const psgReference = e.target.childNodes[0]
         const psgContent = e.target.childNodes[1]
         
-        if (psgReference.getBoundingClientRect().width === 0) {
+        if (psgReference.getBoundingClientRect().width < psgContent.getBoundingClientRect().width) {
+            psgContent.style.setProperty('transition', `transform ${halfFlipTime}ms ${flipTimingFirstHalf}`);
+            psgReference.style.setProperty('transition', `transform ${halfFlipTime}ms ${flipTimingSecondHalf}`);
+
             psgContent.style.setProperty('transform', 'rotateY(90deg)');
             setTimeout(() => {
                 psgReference.style.setProperty('transform', 'rotateY(0deg)');
-            }, 150);
-        } else if (psgContent.getBoundingClientRect().width === 0) {
+            }, halfFlipTime);
+        } else if (psgContent.getBoundingClientRect().width < psgReference.getBoundingClientRect().width) {
+            psgReference.style.setProperty('transition', `transform ${halfFlipTime}ms ${flipTimingFirstHalf}`);
+            psgContent.style.setProperty('transition', `transform ${halfFlipTime}ms ${flipTimingSecondHalf}`);
+
             psgReference.style.setProperty('transform', 'rotateY(-90deg)');
             setTimeout(() => {
                 psgContent.style.setProperty('transform', 'rotateY(0deg)');
-            }, 150);
+            }, halfFlipTime);
         }
     }
 
@@ -28,15 +40,19 @@ const FlashCards: React.FC = () => {
         const psgContent: (HTMLElement | null) = document.querySelector(`.${flashCardStyles.psgContent}`)
 
         if (psgReference?.getBoundingClientRect().width === 0) {
+            psgContent?.style.setProperty('transition', `transform ${halfFlipTime}ms ${flipTimingFirstHalf}`);
+            psgReference.style.setProperty('transition', `transform ${halfFlipTime}ms ${flipTimingSecondHalf}`);
+
             psgContent?.style.setProperty('transform', 'rotateY(90deg)');
             setTimeout(() => {
                 psgReference?.style.setProperty('transform', 'rotateY(0deg)');
+
                 if (dir === 'left') {
                     dispatch(decrementIndex())
                 } else {
                     dispatch(incrementIndex())
                 }
-            }, 150);
+            }, halfFlipTime);
         } else {
             if (dir === 'left') {
                 dispatch(decrementIndex())
