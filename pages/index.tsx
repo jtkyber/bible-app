@@ -81,6 +81,8 @@ const Home: NextPage = () => {
         }
       } catch (err) {
         console.log(err)
+      } finally {
+        input.value = ''
       }
     }
   }
