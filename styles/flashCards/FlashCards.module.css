@@ -157,6 +157,7 @@
   -webkit-transition: all 0.15s linear;
   transition: all 0.15s linear;
   padding: 2rem;
+  border: 0.2rem solid #452117;
 }
 
 .flashCardSection .flashCard .psgRef {

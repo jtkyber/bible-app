@@ -55,6 +55,8 @@ const CatNav: React.FC = () => {
     }
 
     const shufflePassages = () => {
+        if (!categories.selectedCatPassages.length) return
+
         let shuffledArray = [...categories.selectedCatPassages]
 
         for (let i = shuffledArray.length -  1; i > 0; i--) {

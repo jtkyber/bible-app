@@ -92,6 +92,7 @@
             pointer-events: none;
             transition: all 0.15s linear;
             padding: 2rem;
+            border: 0.2rem solid $red_brown;
         }
         
         
@@ -113,5 +114,4 @@
             }
         }
     }
-
 }
