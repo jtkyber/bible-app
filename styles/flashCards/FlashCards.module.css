@@ -12,6 +12,7 @@
           align-items: center;
   justify-items: center;
   position: relative;
+  overflow: hidden;
 }
 
 .flashCardSection .arrow {
@@ -69,6 +70,8 @@
           align-items: center;
   cursor: pointer;
   overflow-y: auto;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
   border-radius: 0.5rem;
   position: relative;
 }
@@ -160,11 +163,11 @@
 .flashCardSection .flashCard .psgRef {
   background-color: #56667A;
   color: #CECCCC;
+  -webkit-transform: scale(-1, 1);
+          transform: scale(-1, 1);
 }
 
 .flashCardSection .flashCard .psgContent {
-  -webkit-transform: rotateY(-90deg);
-          transform: rotateY(-90deg);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -174,6 +177,8 @@
           flex-flow: column nowrap;
   background-color: #748E54;
   color: #1b0d09;
+  display: none;
+  text-align: left;
 }
 
 .flashCardSection .flashCard .psgContent [data-number] {

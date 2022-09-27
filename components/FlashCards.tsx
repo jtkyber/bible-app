@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { decrementIndex, incrementIndex } from '../redux/flashCardSlice'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import flashCardStyles from '../styles/flashCards/FlashCards.module.scss'
@@ -5,54 +6,58 @@ import flashCardStyles from '../styles/flashCards/FlashCards.module.scss'
 const FlashCards: React.FC = () => {
     const flashCards = useAppSelector(state => state.flashCards)
     const dispatch = useAppDispatch()
-    const halfFlipTime = 800
-    const flipTimingFirstHalf = 'cubic-bezier(.5,0,1,1)'
-    const flipTimingSecondHalf = 'cubic-bezier(0,0,.5,1)'
+    const flipTime = 500
+    const flipTiming = 'ease-in-out'
+    const cardRef = useRef<HTMLDivElement>(null)
+    const psgReferenceRef = useRef<HTMLHeadingElement>(null)
+    const psgContentRef = useRef<HTMLDivElement>(null)
 
-    // const flipTimingFirstHalf = 'ease-in'
-    // const flipTimingSecondHalf = 'ease-out'
+    const flipCard = () => {
+        if (!(cardRef.current && psgReferenceRef.current && psgContentRef.current)) return
 
-    const flipCard = (e) => {
-        const psgReference = e.target.childNodes[0]
-        const psgContent = e.target.childNodes[1]
-        
-        if (psgReference.getBoundingClientRect().width < psgContent.getBoundingClientRect().width) {
-            psgContent.style.setProperty('transition', `transform ${halfFlipTime}ms ${flipTimingFirstHalf}`);
-            psgReference.style.setProperty('transition', `transform ${halfFlipTime}ms ${flipTimingSecondHalf}`);
+        const psgRefStyle = getComputedStyle(psgReferenceRef.current)
+        const psgContentStyle = getComputedStyle(psgContentRef.current)
 
-            psgContent.style.setProperty('transform', 'rotateY(90deg)');
+        cardRef.current.style.setProperty('transition', `transform ${flipTime}ms ${flipTiming}`)
+
+        if (psgRefStyle.display === 'none') {
+            cardRef.current.style.setProperty('transform', 'rotateX(2deg) rotateY(180deg)')
             setTimeout(() => {
-                psgReference.style.setProperty('transform', 'rotateY(0deg)');
-            }, halfFlipTime);
-        } else if (psgContent.getBoundingClientRect().width < psgReference.getBoundingClientRect().width) {
-            psgReference.style.setProperty('transition', `transform ${halfFlipTime}ms ${flipTimingFirstHalf}`);
-            psgContent.style.setProperty('transition', `transform ${halfFlipTime}ms ${flipTimingSecondHalf}`);
-
-            psgReference.style.setProperty('transform', 'rotateY(-90deg)');
+                if (psgReferenceRef.current && psgContentRef.current) {
+                    psgReferenceRef.current.style.setProperty('display', 'flex')
+                    psgContentRef.current.style.setProperty('display', 'none')
+                }
+            }, flipTime / 2)
+        } else if (psgContentStyle.display === 'none') {
+            cardRef.current.style.setProperty('transform', 'rotateX(2deg) rotateY(0deg)')
             setTimeout(() => {
-                psgContent.style.setProperty('transform', 'rotateY(0deg)');
-            }, halfFlipTime);
+                if (psgReferenceRef.current && psgContentRef.current) {
+                    psgContentRef.current.style.setProperty('display', 'flex')
+                    psgReferenceRef.current.style.setProperty('display', 'none')
+                }
+            }, flipTime / 2)
         }
     }
 
     const changeCard = (dir) => {
-        const psgReference: (HTMLElement | null) = document.querySelector(`.${flashCardStyles.psgRef}`)
-        const psgContent: (HTMLElement | null) = document.querySelector(`.${flashCardStyles.psgContent}`)
+        if (!(cardRef.current && psgReferenceRef.current && psgContentRef.current)) return
 
-        if (psgReference?.getBoundingClientRect().width === 0) {
-            psgContent?.style.setProperty('transition', `transform ${halfFlipTime}ms ${flipTimingFirstHalf}`);
-            psgReference.style.setProperty('transition', `transform ${halfFlipTime}ms ${flipTimingSecondHalf}`);
+        const psgRefStyle = getComputedStyle(psgReferenceRef.current)
 
-            psgContent?.style.setProperty('transform', 'rotateY(90deg)');
+        if (psgRefStyle.display === 'none') {
+            cardRef.current.style.setProperty('transform', 'rotateX(3deg) rotateY(180deg)')
             setTimeout(() => {
-                psgReference?.style.setProperty('transform', 'rotateY(0deg)');
+                if (psgReferenceRef.current && psgContentRef.current) {
+                    psgReferenceRef.current.style.setProperty('display', 'flex')
+                    psgContentRef.current.style.setProperty('display', 'none')
 
-                if (dir === 'left') {
-                    dispatch(decrementIndex())
-                } else {
-                    dispatch(incrementIndex())
+                    if (dir === 'left') {
+                        dispatch(decrementIndex())
+                    } else {
+                        dispatch(incrementIndex())
+                    }
                 }
-            }, halfFlipTime);
+            }, flipTime / 2)
         } else {
             if (dir === 'left') {
                 dispatch(decrementIndex())
@@ -60,20 +65,17 @@ const FlashCards: React.FC = () => {
                 dispatch(incrementIndex())
             }
         }
-
     }
 
     return (
-        <>
         <div className={flashCardStyles.flashCardSection}>
             <button onClick={() => changeCard('left')} className={`${flashCardStyles.arrow} ${flashCardStyles.left}`}>{'<'}</button>
-            <div onClick={flipCard} className={flashCardStyles.flashCard}>
-                <h3 className={flashCardStyles.psgRef}>{ flashCards?.shuffledCatPassages[flashCards.index].reference }</h3>
-                <div className={flashCardStyles.psgContent} dangerouslySetInnerHTML={{__html: flashCards?.shuffledCatPassages[flashCards.index].content}}></div>
+            <div ref={cardRef} onClick={flipCard} className={flashCardStyles.flashCard}>
+                <h3 ref={psgReferenceRef} className={flashCardStyles.psgRef}>{ flashCards?.shuffledCatPassages[flashCards.index].reference }</h3>
+                <div ref={psgContentRef} className={flashCardStyles.psgContent} dangerouslySetInnerHTML={{__html: flashCards?.shuffledCatPassages[flashCards.index].content}}></div>
             </div>
             <button onClick={() => changeCard('right')} className={`${flashCardStyles.arrow} ${flashCardStyles.right}`}>{'>'}</button>
         </div>
-        </>
     )
 }
 

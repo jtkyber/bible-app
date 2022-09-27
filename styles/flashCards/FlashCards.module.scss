@@ -10,6 +10,7 @@
     align-items: center;
     justify-items: center;
     position: relative;
+    overflow: hidden;
     
     .arrow {
         border: none;
@@ -47,6 +48,7 @@
         align-items: center;
         cursor: pointer;
         overflow-y: auto;
+        transform: rotateY(180deg);
 
         @include miniScrollbar;
         &::-webkit-scrollbar-track {
@@ -97,15 +99,17 @@
         .psgRef {
             background-color: $grey_blue;
             color: $light_grey;
+            transform: scale(-1, 1);
         }
         
         .psgContent {
-            transform: rotateY(-90deg);
             display: flex;
             flex-flow: column nowrap;
             background-color: $moss_green;
             color: $red_brown_dark;
-
+            display: none;
+            text-align: left;
+            
             [data-number] {
                 vertical-align: super;
                 font-size: smaller;
