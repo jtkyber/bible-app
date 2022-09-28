@@ -46,7 +46,7 @@ const FlashCards: React.FC = () => {
         const slideTimeHalf: number = 150
         const slideAmt: string = '75vw'
 
-        if (dir === 'left') {
+        if (dir === 'right') {
             slideToDist = `-${slideAmt}`
             slideFromDist = `${slideAmt}`
         } else {
