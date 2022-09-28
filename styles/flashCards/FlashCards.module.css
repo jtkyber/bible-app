@@ -72,6 +72,9 @@
   overflow-y: auto;
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
+  -webkit-box-shadow: 0 0 0.8rem 0rem rgba(0, 0, 0, 0.8);
+          box-shadow: 0 0 0.8rem 0rem rgba(0, 0, 0, 0.8);
+  border: 1vmin solid #CECCCC;
   border-radius: 0.5rem;
   position: relative;
 }
@@ -175,8 +178,8 @@
   -webkit-box-direction: normal;
       -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
-  background-color: #748E54;
-  color: #1b0d09;
+  background-color: #56667A;
+  color: #CECCCC;
   display: none;
   text-align: left;
 }
