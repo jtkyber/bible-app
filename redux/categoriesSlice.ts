@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { IPassages } from "../models/userModel"
 
-interface ISelectedCat {
+export interface ISelectedCat {
     _id: string,
     name: string
 }
 
-interface ICat {
+export interface ICat {
     selectedCat: ISelectedCat
     selectedCatPassages: IPassages[]
     addingPassage: boolean

@@ -2,23 +2,24 @@ import axios from 'axios'
 import type { NextPage } from 'next'
 import { useEffect, useRef } from 'react'
 import { IUserState, setUser } from '../redux/userSlice'
-import { initialState as initialCatState, setPassagesNotInCat, setSelectedCat, setSelectedCatPassages } from '../redux/categoriesSlice'
+import { ICat, initialState as initialCatState, setPassagesNotInCat, setSelectedCat, setSelectedCatPassages } from '../redux/categoriesSlice'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import Passage from '../components/Passage'
 import CatNav from '../components/CatNav'
 import FlashCards from '../components/FlashCards'
 import homeStyles from '../styles/home/Home.module.scss'
-import { disableFlashCardMode } from '../redux/flashCardSlice'
+import { disableFlashCardMode, IFlash } from '../redux/flashCardSlice'
+import { IPassages } from '../models/userModel'
 
 const Home: NextPage = () => {
-  const user = useAppSelector(state => state.user)
-  const categories = useAppSelector(state => state.categories)
-  const flashCards = useAppSelector(state => state.flashCards)
+  const user: IUserState = useAppSelector(state => state.user)
+  const categories: ICat = useAppSelector(state => state.categories)
+  const flashCards: IFlash = useAppSelector(state => state.flashCards)
   const addCatBtnRef: React.MutableRefObject<any> = useRef(null)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    const passagesNotInCat = user.passages.filter(psg => {
+    const passagesNotInCat: IPassages[] = user.passages.filter(psg => {
       for (const catPsg of categories.selectedCatPassages) {
         if (catPsg.id == psg.id) return false
       }
@@ -29,11 +30,12 @@ const Home: NextPage = () => {
   }, [categories.selectedCatPassages])
 
   //-----Fetch passages-----
-  const fetchPassages = async (e) => {
+  const fetchPassages = async (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
       if (categories.addingPassage) return
       dispatch(disableFlashCardMode())
-      const catName = e.target?.innerText
+      const catBtn = e.target as HTMLButtonElement
+      const catName: string = catBtn.innerText
       let catObject: any = {}
       
       for (const cat of user.categories) {
@@ -46,7 +48,7 @@ const Home: NextPage = () => {
       if (!catObject?._id) return
       dispatch(setSelectedCat(catObject))
 
-      const queryParams = `username=${user.username}&catName=${catName}`
+      const queryParams: string = `username=${user.username}&catName=${catName}`
       const res = await axios.get(`/api/getPassages?${queryParams}`)
 
       if (res?.data?.[0]?._id) {
@@ -57,7 +59,7 @@ const Home: NextPage = () => {
     }
   }
 
-  const createCategory = async () => {
+  const createCategory = async (): Promise<void> => {
     const input = addCatBtnRef.current
     if (!input.classList.contains(homeStyles.show)) {
       input.classList.add(homeStyles.show)
@@ -87,7 +89,7 @@ const Home: NextPage = () => {
     }
   }
 
-  const handleAllPsgClick = () => {
+  const handleAllPsgClick = (): void => {
     if (categories.addingPassage) return
     dispatch(setSelectedCatPassages([]))
     dispatch(setSelectedCat(initialCatState.selectedCat))

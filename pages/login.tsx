@@ -14,16 +14,18 @@ const Login: NextPage = () => {
         router.prefetch('/')
     }, [])
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.MouseEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault()
         try {
-            const form = e.target
-            const username = form.querySelector('#username').value
-            const password = form.querySelector('#password').value
-
+            const form = e.target as HTMLFormElement
+            
+            const username: HTMLInputElement | null = form.querySelector('#username')
+            const password: HTMLInputElement | null = form.querySelector('#password')
+            if (username == null || password == null) return
+            
             const res = await axios.post('/api/login', {
-                username,
-                password
+                username: username.value,
+                password: password.value
             })
 
             const user: IUserState = res.data;
@@ -50,7 +52,7 @@ const Login: NextPage = () => {
                 <button className={logRegStyles.submitBtn} value='submit'>Submit</button>
             </form>
         </div>
-    );
-};
+    )
+}
 
 export default Login;

@@ -19,17 +19,17 @@
   border: none;
   width: 2rem;
   height: 5rem;
-  background-color: transparent;
   border: 0.2rem solid #56667A;
-  color: #56667A;
+  background-color: #56667A;
+  color: #CECCCC;
   font-size: 1.5rem;
   font-weight: 800;
-  -webkit-transition: opacity ease-out 0.15s;
-  transition: opacity ease-out 0.15s;
+  z-index: 5;
 }
 
 .flashCardSection .arrow:hover {
-  opacity: 0.6;
+  background-color: #CECCCC;
+  color: #56667A;
 }
 
 .flashCardSection .arrow.left {
@@ -40,6 +40,7 @@
       justify-self: left;
   border-top-right-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
+  border-left: none;
 }
 
 .flashCardSection .arrow.right {
@@ -50,6 +51,7 @@
       justify-self: right;
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
+  border-right: none;
 }
 
 .flashCardSection .flashCard {
@@ -72,10 +74,9 @@
   overflow-y: auto;
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
-  -webkit-box-shadow: 0 0 0.8rem 0rem rgba(0, 0, 0, 0.8);
-          box-shadow: 0 0 0.8rem 0rem rgba(0, 0, 0, 0.8);
-  border: 1vmin solid #CECCCC;
-  border-radius: 0.5rem;
+  -webkit-box-shadow: 0 0 0 1vmin #CECCCC, 0 0 1rem 0rem rgba(0, 0, 0, 0.8);
+          box-shadow: 0 0 0 1vmin #CECCCC, 0 0 1rem 0rem rgba(0, 0, 0, 0.8);
+  border-radius: 1rem;
   position: relative;
 }
 
@@ -116,7 +117,9 @@
 
 .flashCardSection .flashCard::-webkit-scrollbar-thumb {
   background: #452117;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .flashCardSection .flashCard::-webkit-scrollbar-thumb:hover {
@@ -129,7 +132,6 @@
   }
   .flashCardSection .flashCard::-webkit-scrollbar-thumb {
     background: rgba(206, 204, 204, 0.6);
-    border-radius: 0.5rem;
   }
   .flashCardSection .flashCard::-webkit-scrollbar-thumb:hover {
     background: rgba(206, 204, 204, 0.4);
@@ -140,7 +142,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  border-radius: 0.5rem;
   width: 100%;
   min-height: 100%;
   height: -webkit-max-content;

@@ -1,10 +1,11 @@
 import React from 'react';
 import { IPassages } from '../models/userModel';
+import { ICat } from '../redux/categoriesSlice';
 import { useAppSelector } from '../redux/hooks';
 import homeStyles from '../styles/home/Home.module.scss'
 
 const Passage = ({ passage }: { passage: IPassages }) => {
-    const categories = useAppSelector(state => state.categories)
+    const categories: ICat = useAppSelector(state => state.categories)
     
     return (
         <div className={`${ homeStyles.passage } ${ categories.addingPassage ? homeStyles.addingPassage : null }`}>

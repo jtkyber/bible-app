@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-interface IBook {
+export interface IBook {
     name: string,
     id: string
 }
 
-interface IPassage {
+export interface IPassage {
     id: string[],
     number: number[]
 }
 
-interface InitialState {
+export interface IBible {
     books: any[]
     chapters: any[]
     verses: string[]
@@ -18,7 +18,7 @@ interface InitialState {
     selectedPassage: IPassage
 }
 
-export const initialState: InitialState = {
+export const initialState: IBible = {
     books: [],
     chapters: [],
     verses: [],

@@ -1,22 +1,22 @@
 import { useRef } from 'react'
-import { decrementIndex, incrementIndex } from '../redux/flashCardSlice'
+import { decrementIndex, IFlash, incrementIndex } from '../redux/flashCardSlice'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import flashCardStyles from '../styles/flashCards/FlashCards.module.scss'
 
 const FlashCards: React.FC = () => {
-    const flashCards = useAppSelector(state => state.flashCards)
+    const flashCards: IFlash = useAppSelector(state => state.flashCards)
     const dispatch = useAppDispatch()
-    const flipTime = 400
-    const flipTiming = 'linear'
+    const flipTime: number = 400
+    const flipTiming: string = 'linear'
     const cardRef = useRef<HTMLDivElement>(null)
     const psgReferenceRef = useRef<HTMLHeadingElement>(null)
     const psgContentRef = useRef<HTMLDivElement>(null)
+    
+    const flipCard = (): void => {
+        if (cardRef.current == null || psgReferenceRef.current == null || psgContentRef.current == null) return
 
-    const flipCard = () => {
-        if (!(cardRef.current && psgReferenceRef.current && psgContentRef.current)) return
-
-        const psgRefStyle = getComputedStyle(psgReferenceRef.current)
-        const psgContentStyle = getComputedStyle(psgContentRef.current)
+        const psgRefStyle: CSSStyleDeclaration = getComputedStyle(psgReferenceRef.current)
+        const psgContentStyle: CSSStyleDeclaration = getComputedStyle(psgContentRef.current)
 
         cardRef.current.style.setProperty('transition', `transform ${flipTime}ms ${flipTiming}`)
 
@@ -39,37 +39,40 @@ const FlashCards: React.FC = () => {
         }
     }
 
-    const changeCardIndex = (dir) => {
-        if (!(cardRef.current && psgReferenceRef.current && psgContentRef.current)) return
+    const changeCardIndex = (dir: string, flip: boolean): void => {
+        if (cardRef.current == null || psgReferenceRef.current == null || psgContentRef.current == null) return
         let slideToDist: string
         let slideFromDist: string
         const slideTimeHalf: number = 150
         const slideAmt: string = '75vw'
 
         if (dir === 'right') {
-            slideToDist = `-${slideAmt}`
+            slideToDist = `${flip ? '' : '-'}${slideAmt}`
             slideFromDist = `${slideAmt}`
         } else {
-            slideToDist = `${slideAmt}`
+            slideToDist = `${flip ? '-' : ''}${slideAmt}`
             slideFromDist = `-${slideAmt}`
         }
 
         cardRef.current.style.setProperty('transition', `transform ${slideTimeHalf}ms linear`)
-        cardRef.current.style.setProperty('transform', `rotateX(3deg) rotateY(180deg) translateX(${slideToDist})`)
+        cardRef.current.style.setProperty('transform', `rotateX(3deg) rotateY(${flip ? '0deg' : '180deg'}) translateX(${slideToDist})`)
 
         setTimeout(() => {
             if (!cardRef.current) return
             cardRef.current.style.setProperty('transition', `transform 0s linear`)
             cardRef.current.style.setProperty('transform', `rotateX(3deg) rotateY(180deg) translateX(${slideFromDist})`)
+
             if (dir === 'left') dispatch(decrementIndex()) 
             else dispatch(incrementIndex())
 
-            const checkForNoTransition = () => {
-                if (!cardRef.current) return
-                console.log('test')
+            const checkForNoTransition = (): void => {
+                if (cardRef.current == null || psgReferenceRef.current == null || psgContentRef.current == null) return
+
                 if (getComputedStyle(cardRef.current).transitionDuration === '0s') {
                     cardRef.current.style.setProperty('transition', `transform ${slideTimeHalf}ms linear`)
                     cardRef.current.style.setProperty('transform', 'rotateX(3deg) rotateY(180deg) translateX(0)')
+                    psgReferenceRef.current.style.setProperty('display', 'flex')
+                    psgContentRef.current.style.setProperty('display', 'none')
                 } else {
                     setTimeout(() => {
                         checkForNoTransition()
@@ -80,27 +83,14 @@ const FlashCards: React.FC = () => {
         }, slideTimeHalf)
     }
 
-    const changeCard = (dir) => {
-        if (!(cardRef.current && psgReferenceRef.current && psgContentRef.current)) return
+    const changeCard = (dir: string): void => {
+        if (cardRef.current == null || psgReferenceRef.current == null || psgContentRef.current == null) return
 
         const psgRefStyle = getComputedStyle(psgReferenceRef.current)
-        cardRef.current.style.setProperty('transition', `transform ${flipTime}ms ${flipTiming}`)
-
         if (psgRefStyle.display === 'none') {
-            cardRef.current.style.setProperty('transform', 'rotateX(3deg) rotateY(180deg) translateX(0)')
-
-            setTimeout(() => {
-                if (psgReferenceRef.current && psgContentRef.current) {
-                    psgReferenceRef.current.style.setProperty('display', 'flex')
-                    psgContentRef.current.style.setProperty('display', 'none')
-                }
-            }, flipTime / 2)
-
-            setTimeout(() => {
-                changeCardIndex(dir)
-            }, flipTime)
+            changeCardIndex(dir, true)
         } else {
-            changeCardIndex(dir)
+            changeCardIndex(dir, false)
         }
     }
 

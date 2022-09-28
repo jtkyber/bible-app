@@ -3,16 +3,16 @@ import NavBar from "./NavBar"
 import Footer from "./Footer"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { useRouter } from "next/router"
-import { setUser } from "../redux/userSlice"
+import { IUserState, setUser } from "../redux/userSlice"
 import layoutStyles from '../styles/layoutStyles/Layout.module.scss' 
 
 const Layout = ({ children }: {children: React.ReactNode}) => {
-    const user = useAppSelector(state => state.user)
+    const user: IUserState = useAppSelector(state => state.user)
     const router = useRouter()
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        const userFromStorage = localStorage.getItem('user')
+        const userFromStorage: (string | null) = localStorage.getItem('user')
         if (userFromStorage && JSON.parse(userFromStorage)?._id?.length) {
             dispatch(setUser(JSON.parse(userFromStorage)))
         }

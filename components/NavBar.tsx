@@ -3,13 +3,13 @@ import { useRouter } from 'next/router'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import Link from 'next/link';
 import navStyles from '../styles/nav/Nav.module.scss'
-import { clearUser } from '../redux/userSlice';
+import { clearUser, IUserState } from '../redux/userSlice';
 import { clearBible } from '../redux/bibleSlice';
 import { disableFlashCardMode } from '../redux/flashCardSlice';
 import { initialState as initialCatState, setAddingPassage, setSelectedCat, setSelectedCatPassages } from '../redux/categoriesSlice';
 
 const NavBar: React.FC = () => {
-    const user = useAppSelector(state => state.user)
+    const user: IUserState = useAppSelector(state => state.user)
     const router = useRouter()
     const dispatch = useAppDispatch()
 
@@ -19,7 +19,7 @@ const NavBar: React.FC = () => {
         dispatch(clearBible())
     }
 
-    const goHome = () => {
+    const goHome = (): void => {
         router.push('/')
         dispatch(disableFlashCardMode())
         dispatch(setAddingPassage(false))

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { IPassages } from "../models/userModel"
 
-interface IFlash {
+export interface IFlash {
     inFlashCardMode: boolean,
     shuffledCatPassages: IPassages[],
     index: number

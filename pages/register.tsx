@@ -78,22 +78,24 @@ const Register: NextPage = () => {
         }
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.MouseEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault()
         try {
-            const form = e.target
-            const username = form.querySelector('#username').value
-            const password = form.querySelector('#password').value
-            const language = form.querySelector('#lang').value
-            const version = form.querySelector('#version').value
+            const form = e.target as HTMLFormElement
 
-            if (language === 'Language' || version === 'Bible Version') return
+            const username: HTMLInputElement | null = form.querySelector('#username')
+            const password: HTMLInputElement | null = form.querySelector('#password')
+            const language: HTMLInputElement | null = form.querySelector('#lang')
+            const version: HTMLInputElement | null = form.querySelector('#version')
+            if (username == null || password == null || language == null || version == null) return
+
+            if (language.value === 'Language' || version.value === 'Bible Version') return
 
             const res = await axios.post('/api/register', {
-                username,
-                password,
-                language,
-                version
+                username: username?.value,
+                password: password?.value,
+                language: language?.value,
+                version: version?.value
             })
 
             const newUser: IUserState = res.data
@@ -108,9 +110,11 @@ const Register: NextPage = () => {
         }
     }
 
-    const setBibleSelection = (e) => {
+    const setBibleSelection = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+        const bibleVersionElement = e.target as HTMLSelectElement
+        
         availableBibles.forEach((b: any) => {
-            if (b.id === e.target.value) {
+            if (b.id === bibleVersionElement.value) {
                 setSelectedBible(b.name)
             }
         })

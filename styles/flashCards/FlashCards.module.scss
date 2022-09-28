@@ -16,18 +16,24 @@
         border: none;
         width: 2rem;
         height: 5rem;
-        background-color: transparent;
         border: 0.2rem solid $grey_blue;
-        color: $grey_blue;
+        background-color: $grey_blue;
+        color: $light_grey;    
         font-size: 1.5rem;
         font-weight: 800;
-        @include fadeOnHover;
-
+        z-index: 5;
+        
+        &:hover {
+            background-color: $light_grey;
+            color: $grey_blue;    
+        }
+        
         &.left {
             grid-area: leftArrow;
             justify-self: left;
             border-top-right-radius: 0.5rem;
             border-bottom-right-radius: 0.5rem;
+            border-left: none;
         }
 
         &.right {
@@ -35,6 +41,7 @@
             justify-self: right;
             border-top-left-radius: 0.5rem;
             border-bottom-left-radius: 0.5rem;
+            border-right: none;
         }
     }
 
@@ -49,8 +56,9 @@
         cursor: pointer;
         overflow-y: auto;
         transform: rotateY(180deg);
-        box-shadow: 0 0 0.8rem 0rem rgba($color: #000000, $alpha: 0.8);
-        border: 1vmin solid $light_grey;
+        box-shadow: 0 0 0 1vmin $light_grey, 0 0 1rem 0rem rgba($color: #000000, $alpha: 0.8);
+        border-radius: 1rem;
+        position: relative;
 
         @include miniScrollbar;
         &::-webkit-scrollbar-track {
@@ -59,8 +67,9 @@
         }
         &::-webkit-scrollbar-thumb {
             background: rgba($color: $red_brown, $alpha: 1);
-            border-radius: 0.5rem;
-            
+            border-radius: 1rem;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
             &:hover {
                 background: rgba($color: $red_brown, $alpha: 0.6);
             }
@@ -70,7 +79,6 @@
             overflow-y: overlay;
             &::-webkit-scrollbar-thumb {
                 background: rgba($color: $light_grey, $alpha: 0.6);
-                border-radius: 0.5rem;
                 
                 &:hover {
                     background: rgba($color: $light_grey, $alpha: 0.4);
@@ -78,14 +86,11 @@
             }
         }
 
-        border-radius: 0.5rem;
-        position: relative;
         
         .psgRef, .psgContent {
             position: absolute;
             top: 0;
             left: 0;
-            border-radius: 0.5rem;
             width: 100%;
             min-height: 100%;
             height: max-content;
