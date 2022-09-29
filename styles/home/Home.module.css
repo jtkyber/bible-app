@@ -41,6 +41,7 @@
 }
 
 .container .categories .categoryBtn {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -56,6 +57,7 @@
   margin-bottom: 1rem;
   -webkit-box-shadow: 0 0 0.3rem 0 black;
           box-shadow: 0 0 0.3rem 0 black;
+  color: #1b0d09;
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -218,15 +220,12 @@
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
-  position: absolute;
-  top: 0;
-  right: 0;
   margin-right: 0.5rem;
   gap: 0.5rem;
 }
 
 .container .passageContainer .passagesHeader .optionContainer button {
-  padding: 0.5rem 0.5rem 0 0.5rem;
+  padding: 0.5rem 0.5rem 0.1rem 0.5rem;
   border: none;
   border-radius: 0.5rem;
   border-top-right-radius: 0;
@@ -242,6 +241,90 @@
 
 .container .passageContainer .passagesHeader .optionContainer button:hover {
   opacity: 0.6;
+}
+
+.container .passageContainer .passagesHeader .optionContainer button.catDeleteBtn {
+  background-color: #961e0e;
+}
+
+.container .passageContainer .passagesHeader .optionContainer .deleteConfirmationContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - $nav_height - $footer_height);
+  z-index: 101;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: none;
+}
+
+.container .passageContainer .passagesHeader .optionContainer .deleteConfirmationContainer .deleteConfirmationWindow {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: 6rem;
+  background-color: #CECCCC;
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: "confirmation confirmation" "confirm cancel";
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.container .passageContainer .passagesHeader .optionContainer .deleteConfirmationContainer .deleteConfirmationWindow h5 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: confirmation;
+  -ms-flex-item-align: start;
+      -ms-grid-row-align: start;
+      align-self: start;
+}
+
+.container .passageContainer .passagesHeader .optionContainer .deleteConfirmationContainer .deleteConfirmationWindow h5 span {
+  color: #539108;
+  font-weight: 800;
+}
+
+.container .passageContainer .passagesHeader .optionContainer .deleteConfirmationContainer .deleteConfirmationWindow button {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.5rem;
+  -ms-flex-item-align: end;
+      -ms-grid-row-align: end;
+      align-self: end;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  font-weight: 800;
+}
+
+.container .passageContainer .passagesHeader .optionContainer .deleteConfirmationContainer .deleteConfirmationWindow button.confirmBtn {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: confirm;
+  color: #961e0e;
+}
+
+.container .passageContainer .passagesHeader .optionContainer .deleteConfirmationContainer .deleteConfirmationWindow button.cancelBtn {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: cancel;
+  color: #56667A;
 }
 
 .container .passageContainer .passagesHeader .selectedPsgName {

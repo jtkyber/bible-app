@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import homeStyles from '../styles/home/Home.module.scss'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import { IUserState, setUser } from '../redux/userSlice'
-import { ICat, setAddingPassage, setSelectedCatPassages } from '../redux/categoriesSlice'
+import { initialState as initialCatState, ICat, setAddingPassage, setSelectedCat, setSelectedCatPassages } from '../redux/categoriesSlice'
 import { toggleInFlashCardMode, setShuffledCatPassages, IFlash } from '../redux/flashCardSlice'
 import { IPassages } from '../models/userModel'
 import axios from 'axios';
@@ -12,6 +12,17 @@ const CatNav: React.FC = () => {
     const categories: ICat = useAppSelector(state => state.categories)
     const flashCards: IFlash = useAppSelector(state => state.flashCards)
     const dispatch = useAppDispatch()
+    const confirmationRef = useRef<HTMLDivElement>(null)
+    const catDeleteBtnRef = useRef<HTMLButtonElement>(null)
+    const cancelBtnRef = useRef<HTMLButtonElement>(null)
+
+    useEffect(() =>{
+        document.addEventListener('click', hideConfirmation)
+
+        return () => {
+            document.removeEventListener('click', hideConfirmation)
+        }
+    }, [])
 
     const addPassagesToCategory = async (selectedPsgs: IPassages[]): Promise<void> => {
         const res = await axios.post('/api/addPsgToCategory', {
@@ -69,6 +80,32 @@ const CatNav: React.FC = () => {
         dispatch(setShuffledCatPassages(shuffledArray))
         dispatch(toggleInFlashCardMode())
     }
+
+    const deleteCategory = async (): Promise<void> => {
+        const res = await axios.put('/api/deleteCategory', {
+            userID: user._id,
+            catID: categories.selectedCat._id
+        })
+
+        if (res.data._id) {
+            if (confirmationRef.current) confirmationRef.current.style.display = 'none'
+            dispatch(setUser(res.data))
+            dispatch(setSelectedCat(initialCatState.selectedCat))
+        }
+    }
+
+    const showConfirmation = (): void => {
+        if (confirmationRef.current) {
+            confirmationRef.current.style.display = 'flex'
+        }
+    }
+    
+    const hideConfirmation = (e): void => {
+        if (!confirmationRef.current) return
+        if (e.target === cancelBtnRef.current || (!confirmationRef.current.contains(e.target) && e.target !== catDeleteBtnRef.current)) {
+            confirmationRef.current.style.display = 'none'
+        }
+    }
       
     return (
         <div className={homeStyles.optionContainer}>
@@ -77,24 +114,32 @@ const CatNav: React.FC = () => {
             ? 
             <>
                 {
-                    !flashCards.inFlashCardMode
-                    ? <button onClick={ handleAddPsgClick }>{ !categories.addingPassage ? 'Add Passages' : 'Save' }</button>  
-                    : null
-                }
-                {
-                    !categories.addingPassage
-                    ? 
-                    <>
-                        <button onClick={shufflePassages}>{ !flashCards.inFlashCardMode ? 'Flash Cards' : 'Back' }</button>
-                    </>
-                    : null
+                    !flashCards.inFlashCardMode && !categories.addingPassage ? 
+                        <>
+                            <button onClick={ handleAddPsgClick }>Add Passages</button>  
+                            <button onClick={shufflePassages}>Flash Cards</button>
+                            <button ref={catDeleteBtnRef} className={homeStyles.catDeleteBtn} onClick={showConfirmation}>Delete</button>
+                        </>
+                        : flashCards.inFlashCardMode ? 
+                            <button onClick={shufflePassages}>Back</button>
+                            : categories.addingPassage ?
+                                <button onClick={ handleAddPsgClick }>Save</button>  
+                                : null
+
                 }
             </>
             : null
 
         }
+            <div ref={confirmationRef} className={homeStyles.deleteConfirmationContainer}>
+                <div className={homeStyles.deleteConfirmationWindow}>
+                    <h5>Are you sure you want to delete <span>{categories.selectedCat.name}</span>?</h5>
+                    <button onClick={deleteCategory} className={homeStyles.confirmBtn}>Delete</button>
+                    <button ref={cancelBtnRef} className={homeStyles.cancelBtn}>Cancel</button>
+                </div>
+            </div>
         </div>
-    );
-};
+    )
+}
 
-export default CatNav;
+export default CatNav
