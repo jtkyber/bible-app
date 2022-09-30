@@ -14,7 +14,7 @@
         background-color: inherit;
         padding: 2rem 0;
         overflow: auto;
-        z-index: 10;
+        z-index: 100;
 
         @include customScrollbar;
 
@@ -121,6 +121,7 @@
             display: flex;
             flex-flow: column nowrap;
             justify-content: flex-end;
+            z-index: 10;
 
             .optionContainer {
                 display: flex;
@@ -145,61 +146,7 @@
                     }
                 }
 
-                .deleteConfirmationContainer {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: calc(100vh - $nav_height - $footer_height);
-                    z-index: 101;
-                    background-color: rgba($color: #000000, $alpha: 0.5);
-                    justify-content: center;
-                    align-items: center;
-                    display: none;
-
-                    .deleteConfirmationWindow {
-                        width: max-content;
-                        height: 6rem;
-                        background-color: $light_grey;
-                        display: grid;
-                        grid-template-areas: 
-                        "confirmation confirmation"
-                        "confirm cancel";
-                        grid-template-columns: 1fr 1fr;
-                        justify-items: center;
-                        padding: 1rem;
-                        border-radius: 1rem;
-
-                        h5 {
-                            grid-area: confirmation;
-                            align-self: start;
-
-                            span {
-                                color: $moss_green_vibrant;
-                                font-weight: 800;
-                            }
-                        }
-                        button {
-                            width: max-content;
-                            height: max-content;
-                            padding: 0.2rem 0.4rem;
-                            border-radius: 0.5rem;
-                            align-self: end;
-                            background-color: transparent;
-                            box-shadow: none;
-                            font-weight: 800;
-
-                            &.confirmBtn {
-                                grid-area: confirm;
-                                color: $deep_red;
-                            }
-                            &.cancelBtn {
-                                grid-area: cancel;
-                                color: $grey_blue;
-                            }
-                        }
-                    }
-                }
+                @include confirmation('deleteCatConfirmationContainer', 'deleteCatConfirmationWindow', 'confirmDeleteCatBtn', 'cancelDeleteCatBtn')
             }
     
             .selectedPsgName {
@@ -222,8 +169,9 @@
             }
 
             .passage {
-                padding: 2rem;
-                padding-top: 0;
+                margin: 2rem;
+                margin-top: 0;
+                position: relative;
     
                 &.addingPassage {
                     display: grid;
@@ -250,6 +198,54 @@
                         font-size: smaller;
                     }
                 }
+
+                .psgOptionsContainer {
+                    height: max-content;
+                    width: max-content;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    cursor: pointer;
+                    padding: 0rem 1rem;
+                    display: flex;
+                    flex-flow: column nowrap;
+                    align-items: flex-end;
+                    gap: 0.3rem;
+
+                    svg {
+                        height: 0.8rem;
+                        width: auto;
+                        pointer-events: none;
+                    }
+
+                    .psgOptions {
+                        width: 5rem;
+                        height: max-content;
+                        display: none;
+                        flex-flow: column nowrap;
+                        background-color: $light_grey;
+                        border: 0.1rem solid $red_brown;
+                        border-radius: 0.2rem;
+                        margin-right: -1rem;
+
+                        .optionsBtn {
+                            width: 100%;
+                            padding: 0.2rem 0.5rem;
+                            border: none;
+                            background-color: transparent;
+                            font-weight: 600;
+
+                            &.deletePsgBtn {
+                                color: $deep_red
+                            }
+
+                            @include fadeOnHover;
+                        }
+                        
+                    }
+                }
+
+                @include confirmation('deletePsgConfirmationContainer', 'deletePsgConfirmationWindow', 'confirmDeletePsgBtn', 'cancelDeletePsgBtn')
             }
         }
 

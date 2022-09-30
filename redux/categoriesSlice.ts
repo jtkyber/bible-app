@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { IPassages } from "../models/userModel"
+import { IPassageState } from "./userSlice"
 
 export interface ISelectedCat {
     _id: string,
@@ -8,9 +8,9 @@ export interface ISelectedCat {
 
 export interface ICat {
     selectedCat: ISelectedCat
-    selectedCatPassages: IPassages[]
+    selectedCatPassages: IPassageState[]
     addingPassage: boolean
-    passagesNotInCat: IPassages[]
+    passagesNotInCat: IPassageState[]
 }
 
 export const initialState: ICat = {
@@ -30,13 +30,13 @@ export const categoriesSlice = createSlice({
         setSelectedCat: (state, action: PayloadAction<ISelectedCat>) => {
             state.selectedCat = action.payload
         },
-        setSelectedCatPassages: (state, action: PayloadAction<IPassages[]>) => {
+        setSelectedCatPassages: (state, action: PayloadAction<IPassageState[]>) => {
             state.selectedCatPassages = action.payload
         },
         setAddingPassage: (state, action: PayloadAction<boolean>) => {
             state.addingPassage = action.payload
         },
-        setPassagesNotInCat: (state, action: PayloadAction<IPassages[]>) => {
+        setPassagesNotInCat: (state, action: PayloadAction<IPassageState[]>) => {
             state.passagesNotInCat = action.payload
         }
     }

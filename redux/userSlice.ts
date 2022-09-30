@@ -5,12 +5,16 @@ export interface ICatState extends ICategories {
     _id: string
 }
 
+export interface IPassageState extends IPassages {
+    _id: string
+}
+
 export interface IUserState {
     _id: string,
     username: string,
     password: string,
     categories: ICatState[],
-    passages: IPassages[],
+    passages: IPassageState[],
     language: string,
     bibleVersion: string,
 }

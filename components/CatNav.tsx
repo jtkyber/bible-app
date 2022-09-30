@@ -117,7 +117,7 @@ const CatNav: React.FC = () => {
                     !flashCards.inFlashCardMode && !categories.addingPassage ? 
                         <>
                             <button onClick={ handleAddPsgClick }>Add Passages</button>  
-                            <button onClick={shufflePassages}>Flash Cards</button>
+                            <button onClick={ shufflePassages }>Flash Cards</button>
                             <button ref={catDeleteBtnRef} className={homeStyles.catDeleteBtn} onClick={showConfirmation}>Delete</button>
                         </>
                         : flashCards.inFlashCardMode ? 
@@ -131,11 +131,11 @@ const CatNav: React.FC = () => {
             : null
 
         }
-            <div ref={confirmationRef} className={homeStyles.deleteConfirmationContainer}>
-                <div className={homeStyles.deleteConfirmationWindow}>
+            <div ref={confirmationRef} className={homeStyles.deleteCatConfirmationContainer}>
+                <div className={homeStyles.deleteCatConfirmationWindow}>
                     <h5>Are you sure you want to delete <span>{categories.selectedCat.name}</span>?</h5>
-                    <button onClick={deleteCategory} className={homeStyles.confirmBtn}>Delete</button>
-                    <button ref={cancelBtnRef} className={homeStyles.cancelBtn}>Cancel</button>
+                    <button onClick={deleteCategory} className={homeStyles.confirmDeleteCatBtn}>Delete</button>
+                    <button ref={cancelBtnRef} className={homeStyles.cancelDeleteCatBtn}>Cancel</button>
                 </div>
             </div>
         </div>

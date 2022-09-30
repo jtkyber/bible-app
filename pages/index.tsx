@@ -1,7 +1,7 @@
 import axios from 'axios'
 import type { NextPage } from 'next'
 import { useEffect, useRef } from 'react'
-import { IUserState, setUser } from '../redux/userSlice'
+import { IPassageState, IUserState, setUser } from '../redux/userSlice'
 import { ICat, initialState as initialCatState, setPassagesNotInCat, setSelectedCat, setSelectedCatPassages } from '../redux/categoriesSlice'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import Passage from '../components/Passage'
@@ -9,7 +9,6 @@ import CatNav from '../components/CatNav'
 import FlashCards from '../components/FlashCards'
 import homeStyles from '../styles/home/Home.module.scss'
 import { disableFlashCardMode, IFlash } from '../redux/flashCardSlice'
-import { IPassages } from '../models/userModel'
 
 const Home: NextPage = () => {
   const user: IUserState = useAppSelector(state => state.user)
@@ -19,7 +18,7 @@ const Home: NextPage = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    const passagesNotInCat: IPassages[] = user.passages.filter(psg => {
+    const passagesNotInCat: IPassageState[] = user.passages.filter(psg => {
       for (const catPsg of categories.selectedCatPassages) {
         if (catPsg.id == psg.id) return false
       }
@@ -30,12 +29,10 @@ const Home: NextPage = () => {
   }, [categories.selectedCatPassages])
 
   //-----Fetch passages-----
-  const fetchPassages = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const fetchPassages = async (catName) => {
     try {
       if (categories.addingPassage) return
       dispatch(disableFlashCardMode())
-      const catBtn = e.target as HTMLButtonElement
-      const catName: string = catBtn.innerText
       let catObject: any = {}
       
       for (const cat of user.categories) {
@@ -100,7 +97,7 @@ const Home: NextPage = () => {
       <div className={homeStyles.categories}>
         <button onClick={handleAllPsgClick} className={homeStyles.categoryBtn}>All Passages</button>
         {
-          user?.categories.map((cat, i) => <button onClick={fetchPassages} key={i} className={homeStyles.categoryBtn}>{cat.name}</button>)
+          user?.categories.map((cat, i) => <button onClick={(e) => fetchPassages(cat.name)} key={i} className={homeStyles.categoryBtn}>{cat.name}</button>)
         }
         <div className={homeStyles.addCatContainer}>
           <input ref={addCatBtnRef} type='text' placeholder='Enter Category Name' className={homeStyles.addCatInput}></input>
@@ -121,11 +118,11 @@ const Home: NextPage = () => {
               {
                 categories.addingPassage 
                 ?
-                  categories.passagesNotInCat.map((psg, i) => <Passage key={i} passage={psg}/>)
+                  categories.passagesNotInCat.map((psg, i) => <Passage key={i} passage={psg} fetchPassages={fetchPassages} />)
                 :
                   categories.selectedCat.name.length 
-                  ? categories.selectedCatPassages.map((psg, i) => <Passage key={i} passage={psg}/>)
-                  : user?.passages.map((psg, i) => <Passage key={i} passage={psg}/>)
+                  ? categories.selectedCatPassages.map((psg, i) => <Passage key={i} passage={psg} fetchPassages={fetchPassages} />)
+                  : user?.passages.map((psg, i) => <Passage key={i} passage={psg} fetchPassages={fetchPassages} />)
               }
             </div>
           : <FlashCards/>

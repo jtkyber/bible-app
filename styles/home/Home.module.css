@@ -17,7 +17,7 @@
   background-color: inherit;
   padding: 2rem 0;
   overflow: auto;
-  z-index: 10;
+  z-index: 100;
 }
 
 .container .categories::-webkit-scrollbar {
@@ -211,6 +211,7 @@
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  z-index: 10;
 }
 
 .container .passageContainer .passagesHeader .optionContainer {
@@ -247,7 +248,7 @@
   background-color: #961e0e;
 }
 
-.container .passageContainer .passagesHeader .optionContainer .deleteConfirmationContainer {
+.container .passageContainer .passagesHeader .optionContainer .deleteCatConfirmationContainer {
   position: absolute;
   top: 0;
   left: 0;
@@ -264,7 +265,7 @@
   display: none;
 }
 
-.container .passageContainer .passagesHeader .optionContainer .deleteConfirmationContainer .deleteConfirmationWindow {
+.container .passageContainer .passagesHeader .optionContainer .deleteCatConfirmationContainer .deleteCatConfirmationWindow {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
@@ -280,22 +281,21 @@
   border-radius: 1rem;
 }
 
-.container .passageContainer .passagesHeader .optionContainer .deleteConfirmationContainer .deleteConfirmationWindow h5 {
+.container .passageContainer .passagesHeader .optionContainer .deleteCatConfirmationContainer .deleteCatConfirmationWindow h5 {
   -ms-grid-row: 1;
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;
   grid-area: confirmation;
   -ms-flex-item-align: start;
-      -ms-grid-row-align: start;
       align-self: start;
 }
 
-.container .passageContainer .passagesHeader .optionContainer .deleteConfirmationContainer .deleteConfirmationWindow h5 span {
+.container .passageContainer .passagesHeader .optionContainer .deleteCatConfirmationContainer .deleteCatConfirmationWindow h5 span {
   color: #539108;
   font-weight: 800;
 }
 
-.container .passageContainer .passagesHeader .optionContainer .deleteConfirmationContainer .deleteConfirmationWindow button {
+.container .passageContainer .passagesHeader .optionContainer .deleteCatConfirmationContainer .deleteCatConfirmationWindow button {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
@@ -313,14 +313,14 @@
   font-weight: 800;
 }
 
-.container .passageContainer .passagesHeader .optionContainer .deleteConfirmationContainer .deleteConfirmationWindow button.confirmBtn {
+.container .passageContainer .passagesHeader .optionContainer .deleteCatConfirmationContainer .deleteCatConfirmationWindow button.confirmDeleteCatBtn {
   -ms-grid-row: 2;
   -ms-grid-column: 1;
   grid-area: confirm;
   color: #961e0e;
 }
 
-.container .passageContainer .passagesHeader .optionContainer .deleteConfirmationContainer .deleteConfirmationWindow button.cancelBtn {
+.container .passageContainer .passagesHeader .optionContainer .deleteCatConfirmationContainer .deleteCatConfirmationWindow button.cancelDeleteCatBtn {
   -ms-grid-row: 2;
   -ms-grid-column: 2;
   grid-area: cancel;
@@ -348,8 +348,9 @@
 }
 
 .container .passageContainer .passages .passage {
-  padding: 2rem;
-  padding-top: 0;
+  margin: 2rem;
+  margin-top: 0;
+  position: relative;
 }
 
 .container .passageContainer .passages .passage.addingPassage {
@@ -384,6 +385,151 @@
 .container .passageContainer .passages .passage .content [data-number] {
   vertical-align: super;
   font-size: smaller;
+}
+
+.container .passageContainer .passages .passage .psgOptionsContainer {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  padding: 0rem 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  gap: 0.3rem;
+}
+
+.container .passageContainer .passages .passage .psgOptionsContainer svg {
+  height: 0.8rem;
+  width: auto;
+  pointer-events: none;
+}
+
+.container .passageContainer .passages .passage .psgOptionsContainer .psgOptions {
+  width: 5rem;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  background-color: #CECCCC;
+  border: 0.1rem solid #452117;
+  border-radius: 0.2rem;
+  margin-right: -1rem;
+}
+
+.container .passageContainer .passages .passage .psgOptionsContainer .psgOptions .optionsBtn {
+  width: 100%;
+  padding: 0.2rem 0.5rem;
+  border: none;
+  background-color: transparent;
+  font-weight: 600;
+  -webkit-transition: opacity ease-out 0.15s;
+  transition: opacity ease-out 0.15s;
+}
+
+.container .passageContainer .passages .passage .psgOptionsContainer .psgOptions .optionsBtn.deletePsgBtn {
+  color: #961e0e;
+}
+
+.container .passageContainer .passages .passage .psgOptionsContainer .psgOptions .optionsBtn:hover {
+  opacity: 0.6;
+}
+
+.container .passageContainer .passages .passage .deletePsgConfirmationContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - $nav_height - $footer_height);
+  z-index: 101;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: none;
+}
+
+.container .passageContainer .passages .passage .deletePsgConfirmationContainer .deletePsgConfirmationWindow {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: 6rem;
+  background-color: #CECCCC;
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: "confirmation confirmation" "confirm cancel";
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.container .passageContainer .passages .passage .deletePsgConfirmationContainer .deletePsgConfirmationWindow h5 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: confirmation;
+  -ms-flex-item-align: start;
+      -ms-grid-row-align: start;
+      align-self: start;
+}
+
+.container .passageContainer .passages .passage .deletePsgConfirmationContainer .deletePsgConfirmationWindow h5 span {
+  color: #539108;
+  font-weight: 800;
+}
+
+.container .passageContainer .passages .passage .deletePsgConfirmationContainer .deletePsgConfirmationWindow button {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.5rem;
+  -ms-flex-item-align: end;
+      -ms-grid-row-align: end;
+      align-self: end;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  font-weight: 800;
+}
+
+.container .passageContainer .passages .passage .deletePsgConfirmationContainer .deletePsgConfirmationWindow button.confirmDeletePsgBtn {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: confirm;
+  color: #961e0e;
+}
+
+.container .passageContainer .passages .passage .deletePsgConfirmationContainer .deletePsgConfirmationWindow button.cancelDeletePsgBtn {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: cancel;
+  color: #56667A;
 }
 
 .container .passageContainer::-webkit-scrollbar {

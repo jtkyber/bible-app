@@ -13,7 +13,7 @@
     align-items: center;
     padding: 0 2rem;
     overflow: visible;
-    z-index: 100;
+    z-index: 1000;
     color: $light_grey;
     
     &::after {
