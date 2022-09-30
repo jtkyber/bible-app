@@ -36,23 +36,6 @@ const Passage = ({ passage, fetchPassages }: { passage: IPassageState, fetchPass
         }
     }
     
-    const showOptions = (e: React.MouseEvent<HTMLDivElement>): void => {
-        const target = e.target as HTMLDivElement
-        const psgOptions = target.querySelector(`.${homeStyles.psgOptions}`) as HTMLDivElement
-        if (psgOptions !== null) psgOptions.style.display = 'flex'
-    }
-    
-    const hideOptions = (e: React.MouseEvent<HTMLDivElement>): void => {
-        const target = e.target as HTMLDivElement
-
-        const psgOptionsContainer = target.classList.contains(homeStyles.psgOptions) 
-            ? target.parentNode as HTMLDivElement : target.classList.contains(homeStyles.psgOptionsBtn) 
-                ? target.parentNode?.parentNode as HTMLDivElement : target as HTMLDivElement
-
-        const psgOptions = psgOptionsContainer.querySelector(`.${homeStyles.psgOptions}`) as HTMLDivElement
-        if (psgOptions !== null) psgOptions.style.display = 'none'
-    }
-    
     return (
         <div className={`${ homeStyles.passage } ${ categories.addingPassage ? homeStyles.addingPassage : null }`}>
             {
@@ -71,11 +54,14 @@ const Passage = ({ passage, fetchPassages }: { passage: IPassageState, fetchPass
                     <div dangerouslySetInnerHTML={{__html: passage.content}} className={homeStyles.content}></div> 
                 </>
             }
-
-            <div onMouseEnter={showOptions} onMouseLeave={hideOptions} className={homeStyles.psgOptionsContainer}>
+            <div className={homeStyles.psgOptionsContainer}>
                 <OptionsDots />
                 <div className={homeStyles.psgOptions}>
-                    <button onClick={removePsgFromCat} className={`${homeStyles.optionsBtn} ${homeStyles.removeFromCatBtn}`}>Remove From Category</button>
+                    {
+                        categories.selectedCat.name.length
+                        ? <button onClick={removePsgFromCat} className={`${homeStyles.optionsBtn} ${homeStyles.removeFromCatBtn}`}>Remove From Category</button>
+                        : null
+                    }
                     <button onClick={deletePassage} className={`${homeStyles.optionsBtn} ${homeStyles.deletePsgBtn}`}>Delete Passage</button>
                 </div>
             </div>
