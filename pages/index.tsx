@@ -97,7 +97,7 @@ const Home: NextPage = () => {
       <div className={homeStyles.categories}>
         <button onClick={handleAllPsgClick} className={homeStyles.categoryBtn}>All Passages</button>
         {
-          user?.categories.map((cat, i) => <button onClick={(e) => fetchPassages(cat.name)} key={i} className={homeStyles.categoryBtn}>{cat.name}</button>)
+          user?.categories.map((cat, i) => <button onClick={() => fetchPassages(cat.name)} key={i} className={homeStyles.categoryBtn}>{cat.name}</button>)
         }
         <div className={homeStyles.addCatContainer}>
           <input ref={addCatBtnRef} type='text' placeholder='Enter Category Name' className={homeStyles.addCatInput}></input>
