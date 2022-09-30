@@ -219,27 +219,42 @@
                     }
 
                     .psgOptions {
-                        width: 5rem;
+                        width: max-content;
                         height: max-content;
                         display: none;
                         flex-flow: column nowrap;
-                        background-color: $light_grey;
-                        border: 0.1rem solid $red_brown;
-                        border-radius: 0.2rem;
+                        background-color: whitesmoke;
+                        border-radius: 0.5rem;
                         margin-right: -1rem;
+                        padding: 0.5rem;
+                        z-index: 10;
+                        box-shadow: 0 0 0.4rem 0 rgba($color: #000000, $alpha: 0.3);
 
                         .optionsBtn {
                             width: 100%;
-                            padding: 0.2rem 0.5rem;
+                            padding: 0.5rem 0.5rem;
                             border: none;
+                            color: black;
+                            border-bottom: 1px solid silver;
                             background-color: transparent;
-                            font-weight: 600;
-
-                            &.deletePsgBtn {
-                                color: $deep_red
+                            transition: color 0.1s linear;
+                            
+                            &:hover {
+                                color: rgba($color: black, $alpha: 0.6);
                             }
 
-                            @include fadeOnHover;
+                            &.deletePsgBtn {
+                                color: $deep_red;
+
+                                &:hover {
+                                    color: rgba($color: $deep_red, $alpha: 0.6);
+                                }
+                            }
+
+                            &:last-child {
+                                border: none;
+                            }
+                            
                         }
                         
                     }

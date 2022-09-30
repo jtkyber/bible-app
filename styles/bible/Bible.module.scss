@@ -75,10 +75,22 @@
                 }
 
                 button {
+                    position: relative;
                     padding: 0.5rem 1rem;
                     border: none;
-                    border-top: 0.1rem solid rgba($color: $red_brown, $alpha: 1.0);
                     background-color: inherit;
+
+                    &::after {
+                        position: absolute;
+                        content: "";
+                        top: 0;
+                        left: 50%;
+                        transform: translate(-50%);
+                        width: 85%;
+                        height: 100%;
+                        border-top: 1px solid rgba($color: black, $alpha: 0.3);
+
+                    }
                     
                     &:first-child {
                         border-top: none;

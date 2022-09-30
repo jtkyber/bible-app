@@ -22,6 +22,19 @@ const Passage = ({ passage, fetchPassages }: { passage: IPassageState, fetchPass
             fetchPassages(categories.selectedCat.name)
         }
     }
+
+    const removePsgFromCat = async (): Promise<void> => {
+        const res = await axios.put('/api/removePsgFromCat', {
+            userID: user._id,
+            catID: categories.selectedCat._id,
+            psgID: passage.id
+        })
+        
+        if (res.data._id) {
+            dispatch(setUser(res.data))
+            fetchPassages(categories.selectedCat.name)
+        }
+    }
     
     const showOptions = (e: React.MouseEvent<HTMLDivElement>): void => {
         const target = e.target as HTMLDivElement
@@ -62,7 +75,8 @@ const Passage = ({ passage, fetchPassages }: { passage: IPassageState, fetchPass
             <div onMouseEnter={showOptions} onMouseLeave={hideOptions} className={homeStyles.psgOptionsContainer}>
                 <OptionsDots />
                 <div className={homeStyles.psgOptions}>
-                    <button onClick={deletePassage} className={`${homeStyles.optionsBtn} ${homeStyles.deletePsgBtn}`}>Delete</button>
+                    <button onClick={removePsgFromCat} className={`${homeStyles.optionsBtn} ${homeStyles.removeFromCatBtn}`}>Remove From Category</button>
+                    <button onClick={deletePassage} className={`${homeStyles.optionsBtn} ${homeStyles.deletePsgBtn}`}>Delete Passage</button>
                 </div>
             </div>
         </div>
