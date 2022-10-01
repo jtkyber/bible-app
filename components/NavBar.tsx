@@ -46,14 +46,12 @@ const NavBar: React.FC = () => {
                     ?
                     <>
                         <Link href='/bible'><a className={navStyles.findPsgBtn}>Find Passage</a></Link>
-                        <Link href='/'><a>Settings</a></Link>
                         <a onClick={logOut}>Log Out</a>
                     </>
                     : router.pathname === '/bible'
                     ? 
                     <>
                         <Link href='/'><a>Back</a></Link>
-                        <Link href='/'><a>Settings</a></Link>
                         <a onClick={logOut}>Log Out</a>
                     </>
                     : null

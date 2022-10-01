@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   width: 100%;
   height: 100%;
   background-color: #CECCCC;
@@ -8,10 +9,10 @@
       grid-template-columns: 17rem 1fr;
   -ms-grid-rows: 1fr;
       grid-template-rows: 1fr;
+  overflow: hidden;
 }
 
 .container .categories {
-  width: 17rem;
   -webkit-box-shadow: 0 0 0.5rem 0 black;
           box-shadow: 0 0 0.5rem 0 black;
   background-color: inherit;
@@ -26,9 +27,8 @@
 
 .container .categories::-webkit-scrollbar-track {
   background-color: transparent;
-  border: 0.1rem solid #452117;
-  border-top: none;
-  border-bottom: none;
+  border: none;
+  border-left: 1px solid rgba(69, 33, 23, 0.8);
 }
 
 .container .categories::-webkit-scrollbar-thumb {
@@ -180,8 +180,6 @@
 .container .passageContainer {
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -190,12 +188,11 @@
       -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
   background-color: inherit;
+  overflow: hidden;
 }
 
 .container .passageContainer .passagesHeader {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
+  position: relative;
   -webkit-box-shadow: 0 0 0.5rem 0 black;
           box-shadow: 0 0 0.5rem 0 black;
   background-color: inherit;
@@ -212,6 +209,10 @@
       -ms-flex-pack: end;
           justify-content: flex-end;
   z-index: 10;
+}
+
+.container .passageContainer .passagesHeader .catDropdownBtn {
+  display: none;
 }
 
 .container .passageContainer .passagesHeader .optionContainer {
@@ -245,7 +246,7 @@
 }
 
 .container .passageContainer .passagesHeader .optionContainer button.catDeleteBtn {
-  background-color: #961e0e;
+  background-color: #b40000;
 }
 
 .container .passageContainer .passagesHeader .optionContainer .deleteCatConfirmationContainer {
@@ -263,6 +264,13 @@
       -ms-flex-align: center;
           align-items: center;
   display: none;
+}
+
+@media screen and (max-width: 620px) {
+  .container .passageContainer .passagesHeader .optionContainer .deleteCatConfirmationContainer {
+    position: fixed;
+    top: 4rem;
+  }
 }
 
 .container .passageContainer .passagesHeader .optionContainer .deleteCatConfirmationContainer .deleteCatConfirmationWindow {
@@ -317,7 +325,7 @@
   -ms-grid-row: 2;
   -ms-grid-column: 1;
   grid-area: confirm;
-  color: #961e0e;
+  color: #b40000;
 }
 
 .container .passageContainer .passagesHeader .optionContainer .deleteCatConfirmationContainer .deleteCatConfirmationWindow button.cancelDeleteCatBtn {
@@ -339,7 +347,28 @@
 .container .passageContainer .passages {
   width: 100%;
   height: 100%;
-  margin-top: 2rem;
+  padding-top: 1rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.container .passageContainer .passages::-webkit-scrollbar {
+  width: 1rem;
+}
+
+.container .passageContainer .passages::-webkit-scrollbar-track {
+  background-color: transparent;
+  border: none;
+  border-left: 1px solid rgba(69, 33, 23, 0.8);
+}
+
+.container .passageContainer .passages::-webkit-scrollbar-thumb {
+  background: #452117;
+  border-radius: 0.5rem;
+}
+
+.container .passageContainer .passages::-webkit-scrollbar-thumb:hover {
+  background: rgba(69, 33, 23, 0.6);
 }
 
 .container .passageContainer .passages.flashCards {
@@ -348,8 +377,7 @@
 }
 
 .container .passageContainer .passages .passage {
-  margin: 2rem;
-  margin-top: 0;
+  padding: 1rem 2rem;
   position: relative;
 }
 
@@ -387,6 +415,10 @@
   font-size: smaller;
 }
 
+.container .passageContainer .passages .passage:hover .psgOptionsContainer {
+  opacity: 1;
+}
+
 .container .passageContainer .passages .passage .psgOptionsContainer {
   height: -webkit-max-content;
   height: -moz-max-content;
@@ -395,8 +427,8 @@
   width: -moz-max-content;
   width: max-content;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 1rem;
+  right: 1rem;
   cursor: pointer;
   padding: 0rem 1rem;
   display: -webkit-box;
@@ -410,6 +442,9 @@
       -ms-flex-align: end;
           align-items: flex-end;
   gap: 0.3rem;
+  opacity: 0;
+  -webkit-transition: opacity 0.15s linear;
+  transition: opacity 0.15s linear;
 }
 
 .container .passageContainer .passages .passage .psgOptionsContainer svg {
@@ -418,8 +453,16 @@
   pointer-events: none;
 }
 
+.container .passageContainer .passages .passage .psgOptionsContainer:hover .psgOptions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .container .passageContainer .passages .passage .psgOptionsContainer .psgOptions {
-  width: 5rem;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
@@ -428,28 +471,40 @@
   -webkit-box-direction: normal;
       -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
-  background-color: #CECCCC;
-  border: 0.1rem solid #452117;
-  border-radius: 0.2rem;
+  background-color: whitesmoke;
+  border-radius: 0.5rem;
   margin-right: -1rem;
+  padding: 0.5rem;
+  z-index: 10;
+  -webkit-box-shadow: 0 0 0.4rem 0 rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 0.4rem 0 rgba(0, 0, 0, 0.3);
 }
 
 .container .passageContainer .passages .passage .psgOptionsContainer .psgOptions .optionsBtn {
   width: 100%;
-  padding: 0.2rem 0.5rem;
+  padding: 0.5rem 0.5rem;
   border: none;
+  color: black;
+  border-bottom: 1px solid silver;
   background-color: transparent;
-  font-weight: 600;
-  -webkit-transition: opacity ease-out 0.15s;
-  transition: opacity ease-out 0.15s;
-}
-
-.container .passageContainer .passages .passage .psgOptionsContainer .psgOptions .optionsBtn.deletePsgBtn {
-  color: #961e0e;
+  -webkit-transition: color 0.1s linear;
+  transition: color 0.1s linear;
 }
 
 .container .passageContainer .passages .passage .psgOptionsContainer .psgOptions .optionsBtn:hover {
-  opacity: 0.6;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.container .passageContainer .passages .passage .psgOptionsContainer .psgOptions .optionsBtn.deletePsgBtn {
+  color: #b40000;
+}
+
+.container .passageContainer .passages .passage .psgOptionsContainer .psgOptions .optionsBtn.deletePsgBtn:hover {
+  color: rgba(180, 0, 0, 0.6);
+}
+
+.container .passageContainer .passages .passage .psgOptionsContainer .psgOptions .optionsBtn:last-child {
+  border: none;
 }
 
 .container .passageContainer .passages .passage .deletePsgConfirmationContainer {
@@ -467,6 +522,13 @@
       -ms-flex-align: center;
           align-items: center;
   display: none;
+}
+
+@media screen and (max-width: 620px) {
+  .container .passageContainer .passages .passage .deletePsgConfirmationContainer {
+    position: fixed;
+    top: 4rem;
+  }
 }
 
 .container .passageContainer .passages .passage .deletePsgConfirmationContainer .deletePsgConfirmationWindow {
@@ -522,7 +584,7 @@
   -ms-grid-row: 2;
   -ms-grid-column: 1;
   grid-area: confirm;
-  color: #961e0e;
+  color: #b40000;
 }
 
 .container .passageContainer .passages .passage .deletePsgConfirmationContainer .deletePsgConfirmationWindow button.cancelDeletePsgBtn {
@@ -532,23 +594,102 @@
   color: #56667A;
 }
 
-.container .passageContainer::-webkit-scrollbar {
-  width: 1rem;
-}
-
-.container .passageContainer::-webkit-scrollbar-track {
-  background-color: transparent;
-  border: 0.1rem solid #452117;
-  border-top: none;
-  border-bottom: none;
-}
-
-.container .passageContainer::-webkit-scrollbar-thumb {
-  background: #452117;
-  border-radius: 0.5rem;
-}
-
-.container .passageContainer::-webkit-scrollbar-thumb:hover {
-  background: rgba(69, 33, 23, 0.6);
+@media screen and (max-width: 620px) {
+  .container {
+    display: block;
+  }
+  .container .categories {
+    position: absolute;
+    left: 0;
+    bottom: 100%;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: -webkit-transform 0.3s ease-in;
+    transition: -webkit-transform 0.3s ease-in;
+    transition: transform 0.3s ease-in;
+    transition: transform 0.3s ease-in, -webkit-transform 0.3s ease-in;
+  }
+  .container .categories.show {
+    -webkit-transition: -webkit-transform 0.3s ease-out;
+    transition: -webkit-transform 0.3s ease-out;
+    transition: transform 0.3s ease-out;
+    transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  .container .passageContainer .passagesHeader .catDropdownBtn {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    -webkit-transform: translate(-50%);
+            transform: translate(-50%);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+    padding: 0.3rem 0.3rem;
+    border: none;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    background-color: #452117;
+    -webkit-box-shadow: 0 0 0.2rem 0 #1b0d09;
+            box-shadow: 0 0 0.2rem 0 #1b0d09;
+    color: #CECCCC;
+  }
+  .container .passageContainer .passagesHeader .optionContainer {
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: end;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: end;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column nowrap;
+            flex-flow: column nowrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    align-items: flex-end;
+    gap: 0.3rem;
+  }
+  .container .passageContainer .passagesHeader .optionContainer button {
+    padding: 0;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+    border: none;
+    border-radius: 0.5rem;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    background-color: transparent;
+    color: #539108;
+    font-weight: 400;
+    font-size: 0.9rem;
+    -webkit-transition: opacity ease-out 0.15s;
+    transition: opacity ease-out 0.15s;
+  }
+  .container .passageContainer .passagesHeader .optionContainer button:hover {
+    opacity: 0.6;
+  }
+  .container .passageContainer .passagesHeader .optionContainer button.catDeleteBtn {
+    background-color: transparent;
+    color: #b40000;
+  }
+  .container .passageContainer .passages .passage .psgOptionsContainer {
+    opacity: 1;
+  }
 }
 /*# sourceMappingURL=Home.module.css.map */

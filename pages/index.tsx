@@ -51,6 +51,8 @@ const Home: NextPage = () => {
       if (res?.data?.[0]?._id) {
         dispatch(setSelectedCatPassages(res.data))
       } else dispatch(setSelectedCatPassages([]))
+
+      hideCategories()
     } catch (err) {
       console.log(err)
     }
@@ -90,6 +92,17 @@ const Home: NextPage = () => {
     if (categories.addingPassage) return
     dispatch(setSelectedCatPassages([]))
     dispatch(setSelectedCat(initialCatState.selectedCat))
+    hideCategories()
+  }
+
+  const showCategories = (): void => {
+    const catList = document.querySelector(`.${homeStyles.categories}`)
+    catList?.classList.add(homeStyles.show)
+  }
+
+  const hideCategories = (): void => {
+    const catList = document.querySelector(`.${homeStyles.categories}`)
+    catList?.classList.remove(homeStyles.show)
   }
   
   return (
@@ -107,6 +120,7 @@ const Home: NextPage = () => {
       
       <div className={homeStyles.passageContainer}>
         <div className={homeStyles.passagesHeader}>
+          <button onClick={showCategories} className={homeStyles.catDropdownBtn}>Categories</button>
           <CatNav />
           <h1 className={homeStyles.selectedPsgName}>{categories.selectedCat.name || 'All Passages'}</h1>
         </div>

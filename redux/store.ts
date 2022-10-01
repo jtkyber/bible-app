@@ -3,13 +3,15 @@ import user from './userSlice'
 import bible from './bibleSlice'
 import categories from './categoriesSlice'
 import flashCards from './flashCardSlice'
+import device from './deviceSlice'
 
 export const store = configureStore({
     reducer: {
         user: user,
         bible: bible,
         categories: categories,
-        flashCards: flashCards
+        flashCards: flashCards,
+        device: device
     }
 })
 

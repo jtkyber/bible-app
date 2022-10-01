@@ -3,7 +3,6 @@
 .container {
     position: relative;
     background-color: $red_brown;
-
     box-shadow: 0 0 1rem 0 rgba($color: $red_brown_dark, $alpha: 1.0);
     width: 100vw;
     height: $nav_height;
@@ -15,6 +14,10 @@
     overflow: visible;
     z-index: 1000;
     color: $light_grey;
+
+    @media screen and (max-width: $mobile_screen_max_width) {
+        padding: 0 1rem;
+    }
     
     &::after {
         position: absolute;
@@ -34,23 +37,32 @@
     }
 
     .left {
+        display: flex;
+        align-items: center;
+
         h1 {
             cursor: pointer;
             @include fadeOnHover;
+
+            @media screen and (max-width: $mobile_screen_max_width) {
+                font-size: 1.5rem;
+                width: fit-content;
+            }
         }
     }
-
+    
     .mid {
-
+        
     }
-
+    
     .right {
         display: flex;
+        align-items: center;
         gap: 1rem;
-
+        
         a {
             @include fadeOnHover;
-
+            
             &.findPsgBtn {
                 background-color: rgba($color: $light_grey, $alpha: 0.9);
                 color: $red_brown;
@@ -58,6 +70,7 @@
                 border-radius: 1rem;
                 line-height: 1.3rem;
                 font-weight: 600;
+                text-align: center;
             }
         }
     }

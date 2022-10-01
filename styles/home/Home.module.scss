@@ -1,15 +1,16 @@
 @import '../variables';
 
 .container {
+    position: relative;
     width: 100%;
     height: 100%;
     background-color: $light_grey;
     display: grid;
     grid-template-columns: $side_panel_width 1fr;
     grid-template-rows: 1fr;
+    overflow: hidden;
 
     .categories {
-        width: $side_panel_width;
         box-shadow: 0 0 0.5rem 0 black;
         background-color: inherit;
         padding: 2rem 0;
@@ -105,15 +106,13 @@
     .passageContainer {
         width: 100%;
         height: 100%;
-        overflow-x: hidden;
-        overflow-y: auto;
         display: flex;
         flex-flow: column nowrap;
         background-color: inherit;
+        overflow: hidden;
 
         .passagesHeader {
-            position: sticky;
-            top: 0;
+            position: relative;
             box-shadow: 0 0 0.5rem 0 black;
             background-color: inherit;
             padding-bottom: 0.5rem;
@@ -122,6 +121,10 @@
             flex-flow: column nowrap;
             justify-content: flex-end;
             z-index: 10;
+
+            .catDropdownBtn {
+                display: none;
+            }
 
             .optionContainer {
                 display: flex;
@@ -161,7 +164,10 @@
         .passages {
             width: 100%;
             height: 100%;
-            margin-top: 1rem;
+            padding-top: 1rem;
+            overflow-x: hidden;
+            overflow-y: auto;
+            @include customScrollbar;
 
             &.flashCards {
                 width: 100%;
@@ -272,11 +278,154 @@
                         
                     }
                 }
-
+                
                 @include confirmation('deletePsgConfirmationContainer', 'deletePsgConfirmationWindow', 'confirmDeletePsgBtn', 'cancelDeletePsgBtn')
             }
         }
 
-        @include customScrollbar;
+    }
+
+    @media screen and (max-width: $mobile_screen_max_width) {
+        display: block;
+        
+        .categories {
+            position: absolute;
+            left: 0;
+            bottom: 100%;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease-in;
+            
+            &.show {
+                transition: transform 0.3s ease-out;
+                transform: translateY(100%);
+            }
+        }
+        
+        .passageContainer {
+            .passagesHeader {
+                .catDropdownBtn {
+                    position: absolute;
+                    top: 0;
+                    left: 50%;
+                    transform: translate(-50%);
+                    display: flex;
+                    width: max-content;
+                    height: max-content;
+                    padding: 0.3rem 0.3rem;
+                    border: none;
+                    border-bottom-left-radius: 0.5rem;
+                    border-bottom-right-radius: 0.5rem;
+                    background-color: $red_brown;
+                    box-shadow: 0 0 0.2rem 0 $red_brown_dark;
+                    color: $light_grey;
+                }
+                
+                .optionContainer {
+                    justify-content: end;
+                    align-items: end;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    flex-flow: column nowrap;
+                    justify-content: center;
+                    align-items: flex-end;
+                    gap: 0.3rem;
+                    
+                    button {
+                        padding: 0;
+                        width: max-content;
+                        height: max-content;
+                        border: none;
+                        border-radius: 0.5rem;
+                        box-shadow: none;
+                        background-color: transparent;
+                        color: $moss_green_vibrant;
+                        font-weight: 400;
+                        font-size: 0.9rem;
+                        @include fadeOnHover;
+                        
+                        &.catDeleteBtn {
+                            background-color: transparent;
+                            color: $deep_red;
+                        }
+                    }
+                    
+                }
+                
+            }
+    
+            .passages {
+                // &.flashCards {
+                    
+                    // }
+                    
+                    .passage {
+                    
+                        // &.addingPassage {
+                        
+                        // }
+                        
+                        // input {
+                            
+                            // }
+                            
+                            // h4 {
+                                
+                                // }
+                                
+                                // .content {
+                                    
+                                    //     [data-number] {
+                            
+                    //     }
+                    // }
+    
+                    // &:hover {
+                    //     .psgOptionsContainer {
+                            
+                    //     }
+                    // }
+    
+                    .psgOptionsContainer {
+                        opacity: 1;
+                        
+                        // svg {
+
+                        // }
+    
+                        // &:hover {
+                        //     .psgOptions {
+
+                        //     }
+                        // }
+    
+                        // .psgOptions {
+    
+                        //     .optionsBtn {
+                                
+                        //         &:hover {
+                                    
+                        //         }
+    
+                        //         &.deletePsgBtn {
+    
+                        //             &:hover {
+
+                        //             }
+                        //         }
+    
+                        //         &:last-child {
+
+                        //         }
+                                
+                        //     }
+                        // }
+                    }
+    
+                }
+            }
+        }
     }
 }

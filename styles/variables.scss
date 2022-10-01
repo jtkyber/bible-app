@@ -6,11 +6,13 @@ $moss_green: #748E54;
 $moss_green_shadow: hsl(88, 25%, 15%);
 $grey_blue: #56667A;
 $deep_red: rgb(180, 0, 0);
+$deep_red_shadow: hsl(0, 100%, 15%);
 $side_panel_width: 17rem;
 $selector_width: 80%;
 $selector_height: 3rem;
 $nav_height: 4rem;
 $footer_height: 2rem;
+$mobile_screen_max_width: 620px; 
 
 @mixin fadeOnHover {
     transition: opacity ease-out 0.15s;
@@ -26,9 +28,8 @@ $footer_height: 2rem;
     
     &::-webkit-scrollbar-track {
       background-color: transparent;
-      border: 0.1rem solid rgba($color: $red_brown, $alpha: 1.0);
-      border-top: none;
-      border-bottom: none;
+      border: none;
+      border-left: 1px solid rgba($color: $red_brown, $alpha: 0.8);
     }
     
     &::-webkit-scrollbar-thumb {
@@ -46,12 +47,6 @@ $footer_height: 2rem;
     &::-webkit-scrollbar {
         width: 0.7rem;
     }
-
-    &::-webkit-scrollbar-track {
-        background-color: transparent;
-        border: none;
-        border-left: 0.1rem solid rgba($color: $red_brown, $alpha: 1.0);
-    }
   }
 
   @mixin confirmation($container, $window, $confirmBtn, $cancelBtn) {
@@ -66,6 +61,11 @@ $footer_height: 2rem;
       justify-content: center;
       align-items: center;
       display: none;
+
+      @media screen and (max-width: $mobile_screen_max_width) {
+        position: fixed;
+        top: $nav_height;
+      }
 
       .#{$window} {
           width: max-content;
