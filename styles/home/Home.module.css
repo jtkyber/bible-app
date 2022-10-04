@@ -370,7 +370,7 @@
   padding-top: 1rem;
   overflow-x: hidden;
   overflow-y: auto;
-  padding-bottom: 50%;
+  padding-bottom: 40vh;
 }
 
 .container .passageContainer .passages::-webkit-scrollbar {

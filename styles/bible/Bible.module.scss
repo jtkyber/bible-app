@@ -239,7 +239,7 @@
         display: flex;
         flex-flow: column nowrap;
         padding: 2rem;
-        padding-bottom: 50%;
+        padding-bottom: 40vh;
         gap: 0.1rem;
 
         @include customScrollbar;
