@@ -1,14 +1,46 @@
 @import '../variables.scss';
 
 .container {
+    position: relative;
     width: 100%;
     height: 100%;
     background-color: $light_grey;
     display: grid;
     grid-template-columns: $side_panel_width 1fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: max-content 1fr;
+    grid-template-areas: 
+    "selectors passageTitle"
+    "selectors passageContent";
+
+    @media screen and (max-width: $mobile_screen_max_width) {
+        display: block;
+    }
+
+    .selectorDropdownBtn {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%);
+        width: max-content;
+        height: max-content;
+        padding: 0.3rem 0.3rem;
+        border: none;
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+        background-color: $red_brown;
+        box-shadow: 0 0 0.2rem 0 $red_brown_dark;
+        color: $light_grey;
+        z-index: 101;
+
+        @media screen and (max-width: $mobile_screen_max_width) {
+            display: flex;
+        }
+
+    }
 
     .selectors {
+        grid-area: selectors;
         height: 100%;
         width: 100%;
         display: flex;
@@ -19,6 +51,23 @@
         padding-bottom: 2rem;
         overflow: hidden;
         box-shadow: 0 0 0.5rem 0 black;
+        background-color: inherit;
+        z-index: 100;
+
+        @media screen and (max-width: $mobile_screen_max_width) {
+            position: absolute;
+            left: 0;
+            bottom: 100%;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease-in;
+            padding-top: 3rem;
+            
+            &.show {
+                transition: transform 0.3s ease-out;
+                transform: translateY(100%);
+            }
+        }
 
         .selectorContainer {
             position: relative;
@@ -165,7 +214,17 @@
         }
     }
 
+    .passageTitle {
+        grid-area: passageTitle;
+        width: 100%;
+        padding: 1.5rem 0 0.5rem 0;
+        text-align: center;
+        box-shadow: 0 0 0.5rem 0 black;
+        font-weight: 200;
+    }
+
     .content {
+        grid-area: passageContent;
         width: 100%;
         height: 100%;
         overflow-x: hidden;
@@ -173,6 +232,7 @@
         display: flex;
         flex-flow: column nowrap;
         padding: 2rem;
+        padding-bottom: 50%;
         gap: 0.1rem;
 
         @include customScrollbar;

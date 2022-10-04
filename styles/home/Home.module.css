@@ -191,6 +191,30 @@
   overflow: hidden;
 }
 
+.container .passageContainer .catDropdownBtn {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 0.3rem 0.3rem;
+  border: none;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  background-color: #452117;
+  -webkit-box-shadow: 0 0 0.2rem 0 #1b0d09;
+          box-shadow: 0 0 0.2rem 0 #1b0d09;
+  color: #CECCCC;
+  z-index: 101;
+}
+
 .container .passageContainer .passagesHeader {
   position: relative;
   -webkit-box-shadow: 0 0 0.5rem 0 black;
@@ -209,10 +233,6 @@
       -ms-flex-pack: end;
           justify-content: flex-end;
   z-index: 10;
-}
-
-.container .passageContainer .passagesHeader .catDropdownBtn {
-  display: none;
 }
 
 .container .passageContainer .passagesHeader .optionContainer {
@@ -350,6 +370,7 @@
   padding-top: 1rem;
   overflow-x: hidden;
   overflow-y: auto;
+  padding-bottom: 50%;
 }
 
 .container .passageContainer .passages::-webkit-scrollbar {
@@ -608,6 +629,7 @@
     transition: -webkit-transform 0.3s ease-in;
     transition: transform 0.3s ease-in;
     transition: transform 0.3s ease-in, -webkit-transform 0.3s ease-in;
+    padding-top: 3rem;
   }
   .container .categories.show {
     -webkit-transition: -webkit-transform 0.3s ease-out;
@@ -617,29 +639,10 @@
     -webkit-transform: translateY(100%);
             transform: translateY(100%);
   }
-  .container .passageContainer .passagesHeader .catDropdownBtn {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    -webkit-transform: translate(-50%);
-            transform: translate(-50%);
+  .container .passageContainer .catDropdownBtn {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    width: -webkit-max-content;
-    width: -moz-max-content;
-    width: max-content;
-    height: -webkit-max-content;
-    height: -moz-max-content;
-    height: max-content;
-    padding: 0.3rem 0.3rem;
-    border: none;
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
-    background-color: #452117;
-    -webkit-box-shadow: 0 0 0.2rem 0 #1b0d09;
-            box-shadow: 0 0 0.2rem 0 #1b0d09;
-    color: #CECCCC;
   }
   .container .passageContainer .passagesHeader .optionContainer {
     -webkit-box-pack: end;

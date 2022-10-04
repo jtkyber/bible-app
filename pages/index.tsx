@@ -95,9 +95,9 @@ const Home: NextPage = () => {
     hideCategories()
   }
 
-  const showCategories = (): void => {
+  const toggleCategories = (): void => {
     const catList = document.querySelector(`.${homeStyles.categories}`)
-    catList?.classList.add(homeStyles.show)
+    catList?.classList.toggle(homeStyles.show)
   }
 
   const hideCategories = (): void => {
@@ -119,8 +119,8 @@ const Home: NextPage = () => {
       </div>
       
       <div className={homeStyles.passageContainer}>
+        { !categories.addingPassage ? <button onClick={toggleCategories} className={homeStyles.catDropdownBtn}>Categories</button> : null }
         <div className={homeStyles.passagesHeader}>
-          <button onClick={showCategories} className={homeStyles.catDropdownBtn}>Categories</button>
           <CatNav />
           <h1 className={homeStyles.selectedPsgName}>{categories.selectedCat.name || 'All Passages'}</h1>
         </div>

@@ -60,6 +60,12 @@
         border-radius: 1rem;
         position: relative;
 
+        @media screen and (max-width: $mobile_screen_max_width) {
+            width: 90%;
+            height: 70%;
+            aspect-ratio: none;
+        }
+
         @include miniScrollbar;
         &::-webkit-scrollbar-track {
             background-color: transparent;
@@ -68,8 +74,6 @@
         &::-webkit-scrollbar-thumb {
             background: rgba($color: $red_brown, $alpha: 1);
             border-radius: 1rem;
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
             &:hover {
                 background: rgba($color: $red_brown, $alpha: 0.6);
             }

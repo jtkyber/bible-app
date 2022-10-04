@@ -1,5 +1,5 @@
 import { NextPage } from 'next'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import { useAppSelector, useAppDispatch } from '../redux/hooks'
 import { initialState, setBooks, setChapters, setVerses, setSelectedBook, setSelectedPassage, IBible, IBook } from '../redux/bibleSlice'
@@ -9,6 +9,8 @@ import { IUserState, setUser } from '../redux/userSlice'
 const Bible: NextPage = () => {
     const user: IUserState = useAppSelector(state => state.user)
     const bible: IBible = useAppSelector(state => state.bible)
+
+    const [selectedChapter, setSelectedChapter] = useState('')
 
     const dispatch = useAppDispatch()
 
@@ -181,13 +183,15 @@ const Bible: NextPage = () => {
 
     //-----Fetch chapter based on bible version and chapter id-----
     //-----Save verses in chapter object to state-----
-    const fetchChapter = async (chapterID): Promise<void> => {
+    const fetchChapter = async (chapter): Promise<void> => {
+        const chapterID = chapter.id 
         const queryParams: string = 'include-verse-spans=true'
          const res = await axios.get(`https://api.scripture.api.bible/v1/bibles/${user.bibleVersion}/chapters/${chapterID}?${queryParams}`, {
             headers: {
                 'api-key': `${process.env.API_KEY}`
             }
         })
+
         const data = res.data.data
         contentRef.current.innerHTML = data.content
         const versesTemp: string[] = []
@@ -195,6 +199,7 @@ const Bible: NextPage = () => {
             versesTemp.push(`${data.id}.${i}`)
         }
         dispatch(setVerses(versesTemp))
+        setSelectedChapter(chapter.number)
     }
 
     //-----Save passage to database-----
@@ -258,11 +263,24 @@ const Bible: NextPage = () => {
     const handleChapterClick = (chapter) => {
         dispatch(setSelectedPassage(initialState.selectedPassage))
         chapterBtnRef.current.innerText = chapter.number
-        fetchChapter(chapter.id)
+        fetchChapter(chapter)
+    }
+
+    const toggleSelectors = (e): void => {
+        const selectors = document.querySelector(`.${bibleStyles.selectors}`)
+
+        if (selectors?.classList.contains(bibleStyles.show)) {
+            e.target.innerText = 'Passage Selector'
+            selectors?.classList.remove(bibleStyles.show)
+        } else {
+            e.target.innerText = 'Passage Text'
+            selectors?.classList.add(bibleStyles.show)
+        }
     }
 
     return (
         <div className={bibleStyles.container}>
+            <button onClick={toggleSelectors} className={bibleStyles.selectorDropdownBtn}>Passage Selector</button>
             <div className={bibleStyles.selectors}>
                 <div className={bibleStyles.selectorContainer} id='bookContainer'>
                     <button ref={bookBtnRef} onClick={toggleBookList} className={bibleStyles.selectorBtn} id='bookBtn'>{bible.selectedBook.name ? bible.selectedBook.name : 'Choose Book'}</button>
@@ -308,6 +326,7 @@ const Bible: NextPage = () => {
                     }
                 </div>
             </div>
+            <h2 className={bibleStyles.passageTitle}>{bible.selectedBook.name} {selectedChapter}</h2>
             <div ref={contentRef} className={bibleStyles.content}></div>
         </div>
     )

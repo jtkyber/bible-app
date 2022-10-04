@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   width: 100%;
   height: 100%;
   background-color: #CECCCC;
@@ -6,11 +7,55 @@
   display: grid;
   -ms-grid-columns: 17rem 1fr;
       grid-template-columns: 17rem 1fr;
-  -ms-grid-rows: 1fr;
-      grid-template-rows: 1fr;
+  -ms-grid-rows: max-content 1fr;
+      grid-template-rows: -webkit-max-content 1fr;
+      grid-template-rows: max-content 1fr;
+      grid-template-areas: "selectors passageTitle" "selectors passageContent";
+}
+
+@media screen and (max-width: 620px) {
+  .container {
+    display: block;
+  }
+}
+
+.container .selectorDropdownBtn {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 0.3rem 0.3rem;
+  border: none;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  background-color: #452117;
+  -webkit-box-shadow: 0 0 0.2rem 0 #1b0d09;
+          box-shadow: 0 0 0.2rem 0 #1b0d09;
+  color: #CECCCC;
+  z-index: 101;
+}
+
+@media screen and (max-width: 620px) {
+  .container .selectorDropdownBtn {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }
 
 .container .selectors {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  grid-area: selectors;
   height: 100%;
   width: 100%;
   display: -webkit-box;
@@ -31,6 +76,31 @@
   overflow: hidden;
   -webkit-box-shadow: 0 0 0.5rem 0 black;
           box-shadow: 0 0 0.5rem 0 black;
+  background-color: inherit;
+  z-index: 100;
+}
+
+@media screen and (max-width: 620px) {
+  .container .selectors {
+    position: absolute;
+    left: 0;
+    bottom: 100%;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: -webkit-transform 0.3s ease-in;
+    transition: -webkit-transform 0.3s ease-in;
+    transition: transform 0.3s ease-in;
+    transition: transform 0.3s ease-in, -webkit-transform 0.3s ease-in;
+    padding-top: 3rem;
+  }
+  .container .selectors.show {
+    -webkit-transition: -webkit-transform 0.3s ease-out;
+    transition: -webkit-transform 0.3s ease-out;
+    transition: transform 0.3s ease-out;
+    transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
 }
 
 .container .selectors .selectorContainer {
@@ -108,10 +178,22 @@
 }
 
 .container .selectors .selectorContainer .options button {
+  position: relative;
   padding: 0.5rem 1rem;
   border: none;
-  border-top: 0.1rem solid #452117;
   background-color: inherit;
+}
+
+.container .selectors .selectorContainer .options button::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+  width: 85%;
+  height: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .container .selectors .selectorContainer .options button:first-child {
@@ -129,9 +211,8 @@
 
 .container .selectors .selectorContainer .options::-webkit-scrollbar-track {
   background-color: transparent;
-  border: 0.1rem solid #452117;
-  border-top: none;
-  border-bottom: none;
+  border: none;
+  border-left: 1px solid rgba(69, 33, 23, 0.8);
 }
 
 .container .selectors .selectorContainer .options::-webkit-scrollbar-thumb {
@@ -145,12 +226,6 @@
 
 .container .selectors .selectorContainer .options::-webkit-scrollbar {
   width: 0.7rem;
-}
-
-.container .selectors .selectorContainer .options::-webkit-scrollbar-track {
-  background-color: transparent;
-  border: none;
-  border-left: 0.1rem solid #452117;
 }
 
 .container .selectors .versesLabel {
@@ -212,9 +287,8 @@
 
 .container .selectors .verseSelection::-webkit-scrollbar-track {
   background-color: transparent;
-  border: 0.1rem solid #452117;
-  border-top: none;
-  border-bottom: none;
+  border: none;
+  border-left: 1px solid rgba(69, 33, 23, 0.8);
 }
 
 .container .selectors .verseSelection::-webkit-scrollbar-thumb {
@@ -228,12 +302,6 @@
 
 .container .selectors .verseSelection::-webkit-scrollbar {
   width: 0.7rem;
-}
-
-.container .selectors .verseSelection::-webkit-scrollbar-track {
-  background-color: transparent;
-  border: none;
-  border-left: 0.1rem solid #452117;
 }
 
 .container .selectors .verseSelection .verseNum {
@@ -273,7 +341,22 @@
           box-shadow: 0 0 0.15rem 0 #27301d;
 }
 
+.container .passageTitle {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: passageTitle;
+  width: 100%;
+  padding: 1.5rem 0 0.5rem 0;
+  text-align: center;
+  -webkit-box-shadow: 0 0 0.5rem 0 black;
+          box-shadow: 0 0 0.5rem 0 black;
+  font-weight: 200;
+}
+
 .container .content {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: passageContent;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
@@ -286,6 +369,7 @@
       -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
   padding: 2rem;
+  padding-bottom: 50%;
   gap: 0.1rem;
 }
 
@@ -295,9 +379,8 @@
 
 .container .content::-webkit-scrollbar-track {
   background-color: transparent;
-  border: 0.1rem solid #452117;
-  border-top: none;
-  border-bottom: none;
+  border: none;
+  border-left: 1px solid rgba(69, 33, 23, 0.8);
 }
 
 .container .content::-webkit-scrollbar-thumb {

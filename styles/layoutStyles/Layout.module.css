@@ -13,5 +13,6 @@
 .container main {
   width: 100vw;
   height: calc(100vh - $nav_height - $footer_height);
+  overflow: hidden;
 }
 /*# sourceMappingURL=Layout.module.css.map */

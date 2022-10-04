@@ -80,15 +80,22 @@
   position: relative;
 }
 
+@media screen and (max-width: 620px) {
+  .flashCardSection .flashCard {
+    width: 90%;
+    height: 70%;
+    aspect-ratio: none;
+  }
+}
+
 .flashCardSection .flashCard::-webkit-scrollbar {
   width: 1rem;
 }
 
 .flashCardSection .flashCard::-webkit-scrollbar-track {
   background-color: transparent;
-  border: 0.1rem solid #452117;
-  border-top: none;
-  border-bottom: none;
+  border: none;
+  border-left: 1px solid rgba(69, 33, 23, 0.8);
 }
 
 .flashCardSection .flashCard::-webkit-scrollbar-thumb {
@@ -107,19 +114,11 @@
 .flashCardSection .flashCard::-webkit-scrollbar-track {
   background-color: transparent;
   border: none;
-  border-left: 0.1rem solid #452117;
-}
-
-.flashCardSection .flashCard::-webkit-scrollbar-track {
-  background-color: transparent;
-  border: none;
 }
 
 .flashCardSection .flashCard::-webkit-scrollbar-thumb {
   background: #452117;
   border-radius: 1rem;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
 }
 
 .flashCardSection .flashCard::-webkit-scrollbar-thumb:hover {
