@@ -217,10 +217,17 @@
     .passageTitle {
         grid-area: passageTitle;
         width: 100%;
-        padding: 1.5rem 0 0.5rem 0;
-        text-align: center;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 0.3rem;
+        justify-content: center;
         box-shadow: 0 0 0.5rem 0 black;
         font-weight: 200;
+        height: 3rem;
+
+        @media screen and (max-width: $mobile_screen_max_width) {
+            height: 4rem;
+        }
     }
 
     .content {
