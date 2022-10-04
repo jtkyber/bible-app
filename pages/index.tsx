@@ -90,6 +90,7 @@ const Home: NextPage = () => {
 
   const handleAllPsgClick = (): void => {
     if (categories.addingPassage) return
+    dispatch(disableFlashCardMode())
     dispatch(setSelectedCatPassages([]))
     dispatch(setSelectedCat(initialCatState.selectedCat))
     hideCategories()
