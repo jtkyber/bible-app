@@ -9,7 +9,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <> 
       <Head>
-        <title>Bible App</title>
+        <title>Verse Collector</title>
       </Head>
       <Provider store={store}>
         <Layout>

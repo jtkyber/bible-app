@@ -57,6 +57,7 @@
 }
 
 .container .left h1 {
+  font-size: 2.8rem;
   cursor: pointer;
   -webkit-transition: opacity ease-out 0.15s;
   transition: opacity ease-out 0.15s;
@@ -68,7 +69,6 @@
 
 @media screen and (max-width: 620px) {
   .container .left h1 {
-    font-size: 1.5rem;
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;

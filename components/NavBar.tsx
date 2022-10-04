@@ -30,7 +30,7 @@ const NavBar: React.FC = () => {
     return (
         <div className={navStyles.container}>
             <div className={navStyles.left}>
-                <h1 onClick={goHome}>Bible App</h1>
+                <h1 onClick={goHome}>VC</h1>
             </div>
             <div className={navStyles.mid}>
 

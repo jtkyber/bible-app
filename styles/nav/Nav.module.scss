@@ -41,11 +41,12 @@
         align-items: center;
 
         h1 {
+            font-size: 2.8rem;
             cursor: pointer;
             @include fadeOnHover;
 
             @media screen and (max-width: $mobile_screen_max_width) {
-                font-size: 1.5rem;
+                // font-size: 1.5rem;
                 width: fit-content;
             }
         }
