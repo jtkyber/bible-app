@@ -14,7 +14,7 @@ const NavBar: React.FC = () => {
     const dispatch = useAppDispatch()
 
     const logOut = (): void => {
-        localStorage.setItem('user', '')
+        sessionStorage.setItem('user', '')
         dispatch(clearUser())
         dispatch(clearBible())
     }

@@ -102,7 +102,7 @@ const Register: NextPage = () => {
             
             if (newUser?._id?.length) {
                 dispatch(setUser(newUser))
-                // localStorage.setItem('user', JSON.stringify(newUser))
+                // sessionStorage.setItem('user', JSON.stringify(newUser))
                 router.replace('/')
             }
         } catch (err) {

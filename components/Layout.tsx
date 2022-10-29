@@ -16,7 +16,7 @@ const Layout = ({ children }: {children: React.ReactNode}) => {
         const mobile: boolean = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth < window.innerHeight))
         dispatch(setIsMobile(mobile))
 
-        const userFromStorage: (string | null) = localStorage.getItem('user')
+        const userFromStorage: (string | null) = sessionStorage.getItem('user')
         if (userFromStorage && JSON.parse(userFromStorage)?._id?.length) {
             dispatch(setUser(JSON.parse(userFromStorage)))
         }
@@ -24,9 +24,9 @@ const Layout = ({ children }: {children: React.ReactNode}) => {
 
     useEffect(() => {
         if (user?._id?.length) {
-            localStorage.setItem('user', JSON.stringify(user))
+            sessionStorage.setItem('user', JSON.stringify(user))
         } else {
-            const userFromStorage = localStorage.getItem('user')
+            const userFromStorage = sessionStorage.getItem('user')
             if (!userFromStorage) router.replace('/login')
         }
     }, [user])

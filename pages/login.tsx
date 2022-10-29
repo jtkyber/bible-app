@@ -32,7 +32,7 @@ const Login: NextPage = () => {
             
             if (user?._id?.length) {
                 dispatch(setUser(user))
-                // localStorage.setItem('user', JSON.stringify(user))
+                // sessionStorage.setItem('user', JSON.stringify(user))
                 router.replace('/')
             }
         } catch (err) {

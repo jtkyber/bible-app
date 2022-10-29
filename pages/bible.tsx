@@ -219,7 +219,7 @@ const Bible: NextPage = () => {
 
         if (res?.data?._id) {
             dispatch(setUser(res.data))
-            // localStorage.setItem('user', JSON.stringify(res?.data))
+            // sessionStorage.setItem('user', JSON.stringify(res?.data))
 
             saveBtn.innerText = 'Saved'
             setTimeout(() => {

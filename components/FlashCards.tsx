@@ -46,7 +46,7 @@ const FlashCards: React.FC = () => {
         const slideTimeHalf: number = 150
         const slideAmt: string = '75vw'
 
-        if (dir === 'right') {
+        if (dir === 'left') {
             slideToDist = `${flip ? '' : '-'}${slideAmt}`
             slideFromDist = `${slideAmt}`
         } else {
@@ -62,7 +62,7 @@ const FlashCards: React.FC = () => {
             cardRef.current.style.setProperty('transition', `transform 0s linear`)
             cardRef.current.style.setProperty('transform', `rotateX(3deg) rotateY(180deg) translateX(${slideFromDist})`)
 
-            if (dir === 'left') dispatch(decrementIndex()) 
+            if (dir === 'right') dispatch(decrementIndex()) 
             else dispatch(incrementIndex())
 
             const checkForNoTransition = (): void => {
