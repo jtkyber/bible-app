@@ -10,6 +10,7 @@
     "pushfix": "git add . && git commit -m'fix' && git push origin main"
   },
   "dependencies": {
+    "@react-hook/resize-observer": "^1.2.6",
     "@reduxjs/toolkit": "^1.8.5",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",

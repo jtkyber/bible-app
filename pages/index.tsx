@@ -14,6 +14,7 @@ const Home: NextPage = () => {
   const user: IUserState = useAppSelector(state => state.user)
   const categories: ICat = useAppSelector(state => state.categories)
   const flashCards: IFlash = useAppSelector(state => state.flashCards)
+  const addCatInputRef: React.MutableRefObject<any> = useRef(null)
   const addCatBtnRef: React.MutableRefObject<any> = useRef(null)
   const dispatch = useAppDispatch()
 
@@ -58,14 +59,16 @@ const Home: NextPage = () => {
     }
   }
 
-  const createCategory = async (): Promise<void> => {
-    const input = addCatBtnRef.current
+  const createCategory = async (e): Promise<void> => {
+    const input = addCatInputRef.current
     if (!input.classList.contains(homeStyles.show)) {
       input.classList.add(homeStyles.show)
+      e.target.innerText = 'Add'
     } else {
       try {
         if (input.value === '') {
           input.classList.remove(homeStyles.show)
+          e.target.innerText = '+'
           return
         }
         
@@ -73,11 +76,12 @@ const Home: NextPage = () => {
           username: user.username,
           name: input.value
         })
-
+        
         const UpdatedUser: IUserState = res.data
         
         if (UpdatedUser?._id) {
           input.classList.remove(homeStyles.show)
+          e.target.innerText = '+'
           dispatch(setUser(UpdatedUser))
         }
       } catch (err) {
@@ -114,8 +118,8 @@ const Home: NextPage = () => {
           user?.categories.map((cat, i) => <button onClick={() => fetchPassages(cat.name)} key={i} className={homeStyles.categoryBtn}>{cat.name}</button>)
         }
         <div className={homeStyles.addCatContainer}>
-          <input ref={addCatBtnRef} type='text' placeholder='Enter Category Name' className={homeStyles.addCatInput}></input>
-          <button onClick={createCategory} className={homeStyles.addCatBtn}>+</button>
+          <input ref={addCatInputRef} type='text' placeholder='Enter Category Name' className={homeStyles.addCatInput}></input>
+          <button ref={addCatBtnRef} onClick={createCategory} className={homeStyles.addCatBtn}>+</button>
         </div>
       </div>
       
