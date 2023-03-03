@@ -1,10 +1,10 @@
-import { NextPage } from 'next'
 import React, { useEffect, useRef, useState } from 'react'
+import { NextPage } from 'next'
 import axios from 'axios'
 import { useAppSelector, useAppDispatch } from '../redux/hooks'
 import { initialState, setBooks, setChapters, setVerses, setSelectedBook, setSelectedPassage, IBible, IBook } from '../redux/bibleSlice'
-import bibleStyles from '../styles/bible/Bible.module.scss'
 import { IUserState, setUser } from '../redux/userSlice'
+import bibleStyles from '../styles/bible/Bible.module.scss'
 
 const Bible: NextPage = () => {
     const user: IUserState = useAppSelector(state => state.user)
@@ -32,29 +32,19 @@ const Bible: NextPage = () => {
         }
     }, [])
 
-    useEffect(() => {
-        bookDropRef?.current?.children[0]?.click()
-    }, [bible.books])
+    useEffect(() => { bookDropRef?.current?.children[0]?.click() }, [bible.books])
 
-    useEffect(() => {
-        chapterDropRef?.current?.children[0]?.click()
-    }, [bible.chapters])
+    useEffect(() => { chapterDropRef?.current?.children[0]?.click() }, [bible.chapters])
 
-    useEffect(() => {
-        if (user?.bibleVersion) fetchBooks()
-    }, [user?.bibleVersion])
+    useEffect(() => { if (user?.bibleVersion) fetchBooks() }, [user?.bibleVersion])
 
     useEffect(() => {
         document.addEventListener('click', handlePageClick)
 
-        return () => {
-            document.removeEventListener('click', handlePageClick)
-        }
+        return () => document.removeEventListener('click', handlePageClick)
     }, [bible])
 
-    useEffect(() => {
-        highlightVerses()
-    }, [bible.selectedPassage])
+    useEffect(() => { highlightVerses() }, [bible.selectedPassage])
 
     //-----Toggle book selector dropdown-----
     const toggleBookList = (): void => {
